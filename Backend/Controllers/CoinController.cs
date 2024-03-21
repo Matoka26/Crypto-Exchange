@@ -2,6 +2,7 @@
 using Binance.Spot;
 using Microsoft.AspNetCore.Http.HttpResults;
 using test_binance_api.Service.CoinService;
+using test_binance_api.Models;
 
 namespace test_binance_api.Controllers
 {
@@ -29,6 +30,21 @@ namespace test_binance_api.Controllers
             {
                 var price = await _coinService.GetLivePrice(pair);
                 return Ok(price);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet("Trade")]
+        public async Task<IActionResult> Trade(string type, string pair, decimal amount)
+        {
+            try
+            {
+                Coin coin = await _coinService.Trade(type,pair,amount);
+                return Ok(coin);
             }
             catch (Exception ex)
             {

@@ -8,9 +8,10 @@ namespace test_binance_api.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? NickName { get; set; }
-        public bool Consent { get; set; }
+        public bool? Consent { get; set; }
 
-        public History History { get; set; }
+        public Guid IdHistory { get; set; }
+        public History? History { get; set; }
         
 
     }

@@ -1,7 +1,27 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using test_binance_api.Data;
 using test_binance_api.Helpers.Extensions;
+using test_binance_api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<BinanceContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+builder.Services.AddIdentity<User, IdentityRole<Guid>>()
+                .AddRoles<IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<BinanceContext>();
+
+builder.Services.Configure<IdentityOptions>(opt =>
+{
+    opt.Password.RequireDigit = false;
+    opt.Password.RequiredLength = 8;
+    opt.User.RequireUniqueEmail = true;
+    opt.SignIn.RequireConfirmedAccount = false;
+    opt.SignIn.RequireConfirmedEmail = false;
+    opt.SignIn.RequireConfirmedPhoneNumber = false;
+});
 
 builder.Services.AddControllers();
 

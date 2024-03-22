@@ -7,7 +7,6 @@ namespace test_binance_api.Models
         public string? DeviceToken { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-/*        public string? UserName { get; set; }*/
         public decimal? Balance { get; set; }
         public bool? Consent { get; set; }
         public Guid? IdHistory { get; set; }

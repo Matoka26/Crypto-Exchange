@@ -63,7 +63,7 @@ namespace test_binance_api.Service.UserService
             }
 
             var hasher = new PasswordHasher<User>();
-/*            if (user.UserName != null) existingUser.UserName = user.UserName;*/
+            if (user.UserName != null) existingUser.UserName = user.UserName;
             if (user.FirstName != null) existingUser.FirstName = user.FirstName;
             if (user.LastName != null) existingUser.LastName = user.LastName;
             if (user.Email != null) existingUser.Email = user.Email;

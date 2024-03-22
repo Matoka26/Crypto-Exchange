@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using test_binance_api.Data;
 
@@ -11,9 +12,11 @@ using test_binance_api.Data;
 namespace test_binance_api.Migrations
 {
     [DbContext(typeof(BinanceContext))]
-    partial class BinanceContextModelSnapshot : ModelSnapshot
+    [Migration("20240321184418_user_with_history")]
+    partial class user_with_history
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,9 +217,6 @@ namespace test_binance_api.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("Balance")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -237,7 +237,7 @@ namespace test_binance_api.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("IdHistory")
+                    b.Property<Guid>("IdHistory")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastName")
@@ -248,6 +248,9 @@ namespace test_binance_api.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NickName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)

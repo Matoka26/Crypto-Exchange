@@ -25,10 +25,10 @@ namespace test_binance_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-            modelBuilder.Entity<Coin>()
-                .HasOne(h => h.History)
-                .WithMany(c => c.Transactions)
-                .HasForeignKey<History>(h => h.Id)
+            modelBuilder.Entity<History>()
+                .HasMany(c => c.Transactions)
+                .WithOne(h => h.History)
+                .HasForeignKey(a => a.IdHistory)
                 .OnDelete(DeleteBehavior.Cascade);
 
         }

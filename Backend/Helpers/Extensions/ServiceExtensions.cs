@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using test_binance_api.Helpers.Seeders;
 using test_binance_api.Models;
 using test_binance_api.Repository.CoinRepository;
 using test_binance_api.Repository.UserRepository;
@@ -26,6 +27,15 @@ namespace test_binance_api.Helpers.Extensions
         {
             services.AddTransient<ICoinService, CoinService>();
             services.AddTransient<IUserService, UserService>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddSeeder(this IServiceCollection services)
+        {
+            services.AddTransient<UserSeeder>();
+            services.AddTransient<RoleSeeder>();
+            services.AddTransient<UserRoleSeeder>();
 
             return services;
         }

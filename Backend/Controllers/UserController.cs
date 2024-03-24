@@ -92,7 +92,7 @@ namespace test_binance_api.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateUserAsync(UserCreateDTO user)
         {
-            return Ok(await _userService.CreateAsync(user));
+            return Ok(await _userWalletHistoryService.CreateAsync(user));
         }
 
         [HttpPost("update")]

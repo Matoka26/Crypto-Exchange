@@ -4,6 +4,7 @@ using test_binance_api.Models;
 using test_binance_api.Models.DTOs.User;
 using test_binance_api.Models.Errors;
 using test_binance_api.Service.UserService;
+using test_binance_api.Service.UserWalletHistoryService;
 
 namespace test_binance_api.Controllers
 {
@@ -13,11 +14,14 @@ namespace test_binance_api.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly IUserService _userService;
+        private readonly IUserWalletHistoryService _userWalletHistoryService;
 
-        public UserController(UserManager<User> userManager, IUserService userService)
+        public UserController(UserManager<User> userManager, IUserService userService,
+            IUserWalletHistoryService userWalletHistoryService)
         {
             _userManager = userManager;
             _userService = userService;
+            _userWalletHistoryService = userWalletHistoryService;
         }
 
 

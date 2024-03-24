@@ -17,14 +17,20 @@ namespace test_binance_api.Data
         {
             base.OnModelCreating(modelBuilder);
 
-
+            //one to one
             modelBuilder.Entity<User>()
                 .HasOne(h => h.History)
                 .WithOne(u => u.User)
-                .HasForeignKey<History>(a => a.IdUser)
+                .HasForeignKey<History>(fk => fk.IdUser)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<User>()
+                .HasOne(w => w.Wallet)
+                .WithOne(u => u.User)
+                .HasForeignKey<Wallet>(fk => fk.IdUser)
+                .OnDelete(DeleteBehavior.Cascade);
 
+            //one to many
             modelBuilder.Entity<History>()
                 .HasMany(c => c.Transactions)
                 .WithOne(h => h.History)

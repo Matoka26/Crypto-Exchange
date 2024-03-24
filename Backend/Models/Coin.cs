@@ -1,8 +1,9 @@
-﻿namespace test_binance_api.Models
+﻿using test_binance_api.Models.Base;
+
+namespace test_binance_api.Models
 {
-    public class Coin
+    public class Coin : BaseEntity
     {
-        public Guid? Id { get; set; }
         public string? Symbol { get; set; }
         public decimal? Price { get; set; }
         public decimal? Amount { get; set; }

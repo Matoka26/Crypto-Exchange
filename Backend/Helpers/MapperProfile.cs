@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using test_binance_api.Models;
+using test_binance_api.Models.DTOs;
 using test_binance_api.Models.DTOs.User;
 
 namespace test_binance_api.Helpers
@@ -20,6 +21,9 @@ namespace test_binance_api.Helpers
 
             CreateMap<User, UserSignUpDTO>();
             CreateMap<UserSignUpDTO, User>();
+
+            CreateMap<Coin, CoinDTO>();
+            CreateMap<CoinDTO, Coin>();
         }
 
     }

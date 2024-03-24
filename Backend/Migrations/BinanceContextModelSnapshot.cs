@@ -155,7 +155,7 @@ namespace test_binance_api.Migrations
 
             modelBuilder.Entity("test_binance_api.Models.Coin", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -168,8 +168,14 @@ namespace test_binance_api.Migrations
                     b.Property<string>("Field")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("FirstCreated")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid?>("IdHistory")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -187,14 +193,48 @@ namespace test_binance_api.Migrations
                     b.ToTable("Coins");
                 });
 
-            modelBuilder.Entity("test_binance_api.Models.History", b =>
+            modelBuilder.Entity("test_binance_api.Models.DTOs.CoinDTO", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<decimal?>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("FirstCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Symbol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("WalletId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WalletId");
+
+                    b.ToTable("CoinDTO");
+                });
+
+            modelBuilder.Entity("test_binance_api.Models.History", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("FirstCreated")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid?>("IdUser")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -238,6 +278,9 @@ namespace test_binance_api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("IdHistory")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("IdWallet")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastName")
@@ -287,6 +330,30 @@ namespace test_binance_api.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("test_binance_api.Models.Wallet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("FirstCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("IdUser")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUser")
+                        .IsUnique()
+                        .HasFilter("[IdUser] IS NOT NULL");
+
+                    b.ToTable("Wallet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -350,11 +417,28 @@ namespace test_binance_api.Migrations
                     b.Navigation("History");
                 });
 
+            modelBuilder.Entity("test_binance_api.Models.DTOs.CoinDTO", b =>
+                {
+                    b.HasOne("test_binance_api.Models.Wallet", null)
+                        .WithMany("Transactions")
+                        .HasForeignKey("WalletId");
+                });
+
             modelBuilder.Entity("test_binance_api.Models.History", b =>
                 {
                     b.HasOne("test_binance_api.Models.User", "User")
                         .WithOne("History")
                         .HasForeignKey("test_binance_api.Models.History", "IdUser")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("test_binance_api.Models.Wallet", b =>
+                {
+                    b.HasOne("test_binance_api.Models.User", "User")
+                        .WithOne("Wallet")
+                        .HasForeignKey("test_binance_api.Models.Wallet", "IdUser")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
@@ -368,6 +452,13 @@ namespace test_binance_api.Migrations
             modelBuilder.Entity("test_binance_api.Models.User", b =>
                 {
                     b.Navigation("History");
+
+                    b.Navigation("Wallet");
+                });
+
+            modelBuilder.Entity("test_binance_api.Models.Wallet", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

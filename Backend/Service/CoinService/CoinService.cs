@@ -19,11 +19,5 @@ namespace test_binance_api.Service.CoinService
             return price;
         }
 
-        public async Task<Coin> Trade(string type, string pair, decimal amount)
-        {
-            Coin trade = await _coinRepository.Trade(type, pair, amount);
-            return trade;
-        }
-
     }
 }

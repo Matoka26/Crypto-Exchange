@@ -37,21 +37,6 @@ namespace test_binance_api.Controllers
             }
 
         }
-
-        [HttpGet("Trade")]
-        public async Task<IActionResult> Trade(string type, string pair, decimal amount)
-        {
-            try
-            {
-                Coin coin = await _coinService.Trade(type,pair,amount);
-                return Ok(coin);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-        }
     }
 }
 

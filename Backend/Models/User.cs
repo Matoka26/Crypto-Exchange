@@ -9,9 +9,13 @@ namespace test_binance_api.Models
         public string? LastName { get; set; }
         public decimal? Balance { get; set; }
         public bool? Consent { get; set; }
+
         public Guid? IdHistory { get; set; }
         public History? History { get; set; }
-        
+
+        public Guid? IdWallet { get; set; }
+        public Wallet? Wallet { get; set; }
+
 
     }
 }

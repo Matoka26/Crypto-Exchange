@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NETCore.MailKit.Core;
 using test_binance_api.Data;
 using test_binance_api.Helpers.Extensions;
 using test_binance_api.Helpers.Seeders;
 using test_binance_api.Models;
+using User.Mailing.Service.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BinanceContext>(
@@ -23,6 +25,13 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.SignIn.RequireConfirmedEmail = false;
     opt.SignIn.RequireConfirmedPhoneNumber = false;
 });
+
+
+// Add Email Configs
+var emailConfig = builder.Configuration
+           .GetSection("EmailConfiguration")
+           .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
 
 builder.Services.AddControllers();
 

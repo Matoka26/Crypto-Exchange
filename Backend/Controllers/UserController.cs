@@ -5,6 +5,8 @@ using test_binance_api.Models.DTOs.User;
 using test_binance_api.Models.Errors;
 using test_binance_api.Service.UserService;
 using test_binance_api.Service.UserWalletHistoryService;
+using User.Mailing.Service.Models;
+using User.Mailing.Service.Services;
 
 namespace test_binance_api.Controllers
 {
@@ -15,21 +17,27 @@ namespace test_binance_api.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IUserService _userService;
         private readonly IUserWalletHistoryService _userWalletHistoryService;
+        private readonly IEmailService _emailService;
 
         public UserController(UserManager<User> userManager, IUserService userService,
-            IUserWalletHistoryService userWalletHistoryService)
+            IUserWalletHistoryService userWalletHistoryService, IEmailService emailService)
         {
             _userManager = userManager;
             _userService = userService;
             _userWalletHistoryService = userWalletHistoryService;
+            _emailService = emailService;
         }
-
-
 
 
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp([FromBody] UserSignUpDTO user)
         {
+            var subject = "Test";
+            var content = "SignUp successfull";
+            var message = new Message(new string[] { user.Email }, subject, content);
+
+
+            _emailService.SendEmail(message);
             return Ok(await _userService.SignUp(user));
         }
 

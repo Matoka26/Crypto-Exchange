@@ -1,6 +1,6 @@
 ﻿
 
-namespace User.Mailing.Service.Models
+namespace Mailing.Service.Models
 {
     public class EmailConfiguration
     {

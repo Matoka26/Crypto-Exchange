@@ -5,7 +5,8 @@ using test_binance_api.Data;
 using test_binance_api.Helpers.Extensions;
 using test_binance_api.Helpers.Seeders;
 using test_binance_api.Models;
-using User.Mailing.Service.Models;
+using Mailing.Service.Models;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BinanceContext>(
@@ -14,7 +15,8 @@ builder.Services.AddDbContext<BinanceContext>(
 
 builder.Services.AddIdentity<User, IdentityRole<Guid>>()
                 .AddRoles<IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<BinanceContext>();
+                .AddEntityFrameworkStores<BinanceContext>()
+                .AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(opt =>
 {
@@ -22,10 +24,9 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.Password.RequiredLength = 8;
     opt.User.RequireUniqueEmail = true;
     opt.SignIn.RequireConfirmedAccount = false;
-    opt.SignIn.RequireConfirmedEmail = false;
+    opt.SignIn.RequireConfirmedEmail = true;        /// !!!!!!!! 
     opt.SignIn.RequireConfirmedPhoneNumber = false;
 });
-
 
 // Add Email Configs
 var emailConfig = builder.Configuration

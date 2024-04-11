@@ -12,7 +12,7 @@ using test_binance_api.Service.CoinService;
 using test_binance_api.Service.TradingService;
 using test_binance_api.Service.UserService;
 using test_binance_api.Service.UserWalletHistoryService;
-using User.Mailing.Service.Services;
+using Mailing.Service.Services;
 
 namespace test_binance_api.Helpers.Extensions
 {

@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\User.Mailing.Service\User.Mailing.Service.csproj" />
+    <ProjectReference Include="..\User.Mailing.Service\Mailing.Service.csproj" />
   </ItemGroup>
 
 </Project>

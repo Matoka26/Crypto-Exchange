@@ -1,8 +1,8 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
-using User.Mailing.Service.Models;
+using Mailing.Service.Models;
 
-namespace User.Mailing.Service.Services
+namespace Mailing.Service.Services
 {
 
     public class EmailService : IEmailService

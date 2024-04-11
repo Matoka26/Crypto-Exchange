@@ -1,6 +1,6 @@
 ﻿using MimeKit;
 
-namespace User.Mailing.Service.Models
+namespace Mailing.Service.Models
 {
     public class Message
     {

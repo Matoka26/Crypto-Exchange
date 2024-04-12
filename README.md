@@ -38,11 +38,11 @@ So that I can make timely decisions and take actions without experiencing delays
 
 ## Tasks:
 1. <b>Enter app:</b> 
-    - [ ] SignUp 
-    - [ ] LogIn 
-    - [ ] LogOut
+    - [x] SignUp 
+    - [x] LogIn 
+    - [x] LogOut
     - [ ] Send verification token
-    - [ ] Notification email
+    - [x] Sending email
 
 2. <b>Dashboard:</b>
     - [ ] Portofolio

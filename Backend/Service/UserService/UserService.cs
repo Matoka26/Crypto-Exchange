@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
-using Mailing.Service.Models;
-using Mailing.Service.Services;
 using Microsoft.AspNetCore.Identity;
-//using NETCore.MailKit.Core;
-using System;
 using test_binance_api.Models;
 using test_binance_api.Models.DTOs.User;
 using test_binance_api.Models.Errors;
 using test_binance_api.Repository.UserRepository;
-
 
 namespace test_binance_api.Service.UserService
 {
@@ -21,17 +16,14 @@ namespace test_binance_api.Service.UserService
         private readonly SignInManager<User> _signInManager;
         //will be used for smtp 
         private readonly IConfiguration _configuration;
-        //for verif token
-        private readonly IEmailService _emailService;
 
-        public UserService(IUserRepository userRepository, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, IEmailService emailService)
+        public UserService(IUserRepository userRepository, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
-            _emailService = emailService;
         }
 
 
@@ -105,6 +97,57 @@ namespace test_binance_api.Service.UserService
             await _signInManager.SignOutAsync();
         }
 
+        public async Task<ErrorResponse> SignUp(UserSignUpDTO signup)
+        {
+            var existsUser = await _userManager.FindByEmailAsync(signup.Email);
+
+            if (existsUser != null)
+                throw new Exception("Email is already used");
+
+            var user = _mapper.Map<User>(signup);
+            var result = await _userManager.CreateAsync(user);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Regular");
+
+                return new ErrorResponse()
+                {
+                    StatusCode = 200,
+                    Message = "Register was successful"
+                };
+            }
+            throw new Exception(result.Errors.First().Description);
+        }
+
+        public async Task<ErrorResponse> ConfirmEmail(string email, string token)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return new ErrorResponse()
+                {
+                    StatusCode = 400,
+                    Message = "There is no user with this email"
+                };
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return new ErrorResponse()
+                {
+                    StatusCode = 200,
+                    Message = "Confirmation successfull"
+                };
+            }
+
+            return new ErrorResponse()
+            {
+                StatusCode = 500,
+                Message = "Confirmation failed"
+            };
+        }
 
         public async Task StoreDeviceToken(string IdUser, string deviceToken)
         {

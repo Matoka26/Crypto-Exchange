@@ -12,7 +12,6 @@ using test_binance_api.Service.CoinService;
 using test_binance_api.Service.TradingService;
 using test_binance_api.Service.UserService;
 using test_binance_api.Service.UserWalletHistoryService;
-using Mailing.Service.Services;
 
 namespace test_binance_api.Helpers.Extensions
 {
@@ -38,8 +37,7 @@ namespace test_binance_api.Helpers.Extensions
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserWalletHistoryService, UserWalletHistoryService>();
             services.AddTransient<ITradingService, TradingService>();
-            services.AddScoped<IEmailService, EmailService>();
-            
+
             return services;
         }
 
@@ -55,4 +53,3 @@ namespace test_binance_api.Helpers.Extensions
 
     }
 }
-

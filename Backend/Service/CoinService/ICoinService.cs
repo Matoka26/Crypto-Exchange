@@ -5,6 +5,7 @@ namespace test_binance_api.Service.CoinService
 {
     public interface ICoinService
     {
-        public Task<decimal> GetLivePrice(string pair);
+        Task<decimal> GetLivePrice(string pair);
+        Task<decimal> GetHistoricalPrice(string pair, DateTime date);
     }
 }

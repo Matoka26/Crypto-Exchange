@@ -19,5 +19,11 @@ namespace test_binance_api.Service.CoinService
             return price;
         }
 
+        public async Task<decimal> GetHistoricalPrice(string pair, DateTime date)
+        {
+            var price = await _coinRepository.GetHistoricalPrice(pair, date);
+            return price;
+        }
+
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Proiect-MDS\\Proiect-MDS\\User.Mailing.Service\\Mailing.Service.csproj": {}
+    "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Proiect-MDS\\Proiect-MDS\\User.Mailing.Service\\Mailing.Service.csproj": {
+    "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Proiect-MDS\\Proiect-MDS\\User.Mailing.Service\\Mailing.Service.csproj",
+        "projectUniqueName": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
         "projectName": "Mailing.Service",
-        "projectPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Proiect-MDS\\Proiect-MDS\\User.Mailing.Service\\Mailing.Service.csproj",
+        "projectPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
         "packagesPath": "C:\\Users\\Mihai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Proiect-MDS\\Proiect-MDS\\User.Mailing.Service\\obj\\",
+        "outputPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mihai\\AppData\\Roaming\\NuGet\\NuGet.Config",

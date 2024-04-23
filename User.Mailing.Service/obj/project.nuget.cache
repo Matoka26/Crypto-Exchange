@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1eNdR5VFYuN4NFkp5FxM2rdVbt2LjDLqV7aPVP7n7SDGCF1reGYuf9qKpp8tLIpcNfrTewqDBPE1/COWsuJjYw==",
+  "dgSpecHash": "osi3AX9pyD3mQ1E/+93+42we1xiq1wE5UU1BhC3K0UDIK6zsaAlcehrOBTi+hkRpTthhLWl8APpycI/9RxgJrQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Proiect-MDS\\Proiect-MDS\\User.Mailing.Service\\Mailing.Service.csproj",
+  "projectFilePath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mihai\\.nuget\\packages\\mailkit\\3.2.0\\mailkit.3.2.0.nupkg.sha512",
     "C:\\Users\\Mihai\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",

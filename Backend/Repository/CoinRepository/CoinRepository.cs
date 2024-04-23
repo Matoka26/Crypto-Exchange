@@ -37,7 +37,7 @@ namespace test_binance_api.Repository.CoinRepository
                 {
                     client.BaseAddress = new Uri("https://api.binance.com/");
 
-                    Console.WriteLine(date.Day);
+
                     string startTime = ((DateTimeOffset)date).ToUnixTimeMilliseconds().ToString();
                     string endTime = ((DateTimeOffset)date.AddDays(1)).ToUnixTimeMilliseconds().ToString();
                     string queryString = $"symbol={pair}&interval=1d&startTime={startTime}&endTime={endTime}&limit=1";
@@ -73,7 +73,6 @@ namespace test_binance_api.Repository.CoinRepository
 
         }
 
-
         public async Task<List<decimal>> GetPreviousPrices(string pair, DateTime date, int offset)
         {
             List<decimal> prices = new List<decimal>();
@@ -87,12 +86,14 @@ namespace test_binance_api.Repository.CoinRepository
 
 
             return prices;
+
         }
 
 
 
         public async Task<decimal> CalculateRSI(List<decimal> prices)
         {
+
 
             if (prices == null || prices.Count < 2)
                 throw new ArgumentException("Invalid prices data.");
@@ -117,6 +118,7 @@ namespace test_binance_api.Repository.CoinRepository
             decimal rs = avgLoss != 0 ? avgGain / avgLoss : 0;
             decimal rsi = 100 - (100 / (1 + rs));
 
+
             return rsi;
         }
 
@@ -124,6 +126,7 @@ namespace test_binance_api.Repository.CoinRepository
         public async Task<List<decimal>> CalculateLastRSIs(string pair, int offset, int amount)
         {
             List<decimal> values = new List<decimal>();
+
             DateTime date = DateTime.Now.AddDays(-1);
 
             var prices = await GetPreviousPrices(pair, date, offset);
@@ -160,7 +163,6 @@ namespace test_binance_api.Repository.CoinRepository
             return values;
 
         }
-
 
     }
 }

@@ -25,7 +25,8 @@ namespace test_binance_api.Service.CoinService
             return price;
         }
 
-        public async Task<decimal> GetPreviousPrices(string pair, DateTime date, int offset)
+        public async Task<List<decimal>> GetPreviousPrices(string pair, DateTime date, int offset)
+
         {
             var prices = await _coinRepository.GetPreviousPrices(pair, date, offset);
             return prices;

@@ -7,7 +7,7 @@ namespace test_binance_api.Service.CoinService
     {
         Task<decimal> GetLivePrice(string pair);
         Task<decimal> GetHistoricalPrice(string pair, DateTime date);
-        Task<decimal> GetPreviousPrices(string pair, DateTime date, int offset);
+        Task<List<decimal>> GetPreviousPrices(string pair, DateTime date, int offset);
         Task<List<decimal>> CalculateLastRSIs(string pair, int offset, int amount);
     }
 }

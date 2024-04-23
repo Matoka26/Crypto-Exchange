@@ -38,7 +38,6 @@ namespace test_binance_api.Repository.CoinRepository
                     client.BaseAddress = new Uri("https://api.binance.com/");
 
 
-
                     string startTime = ((DateTimeOffset)date).ToUnixTimeMilliseconds().ToString();
                     string endTime = ((DateTimeOffset)date.AddDays(1)).ToUnixTimeMilliseconds().ToString();
                     string queryString = $"symbol={pair}&interval=1d&startTime={startTime}&endTime={endTime}&limit=1";
@@ -61,9 +60,9 @@ namespace test_binance_api.Repository.CoinRepository
                     }
 
 
-                    decimal bitcoinPrice = (decimal)jsonArray[0][4];
+                    decimal historicalPrice = (decimal)jsonArray[0][4];
 
-                    return bitcoinPrice;
+                    return historicalPrice;
                 }
             }
             catch (HttpRequestException e)
@@ -74,8 +73,7 @@ namespace test_binance_api.Repository.CoinRepository
 
         }
 
-
-        public async Task<decimal> GetPreviousPrices(string pair, DateTime date, int offset)
+        public async Task<List<decimal>> GetPreviousPrices(string pair, DateTime date, int offset)
         {
             List<decimal> prices = new List<decimal>();
 
@@ -86,9 +84,9 @@ namespace test_binance_api.Repository.CoinRepository
                 prices.Add(price);
             }
 
-            return await CalculateRSI(prices);
-/*
-            return prices;*/
+
+            return prices;
+
         }
 
 
@@ -96,29 +94,31 @@ namespace test_binance_api.Repository.CoinRepository
         public async Task<decimal> CalculateRSI(List<decimal> prices)
         {
 
-            List<decimal> changes = new List<decimal>();
-            for (int i = 0; i < prices.Count - 1; i++)
+
+            if (prices == null || prices.Count < 2)
+                throw new ArgumentException("Invalid prices data.");
+
+            decimal gainSum = 0;
+            decimal lossSum = 0;
+
+            // Calculate initial gain and loss
+            for (int i = 1; i < prices.Count; i++)
             {
-                changes.Add(prices[i + 1] - prices[i]);
+                decimal priceDiff = prices[i] - prices[i - 1];
+                if (priceDiff >= 0)
+                    gainSum += priceDiff;
+                else
+                    lossSum += Math.Abs(priceDiff);
             }
 
-            List<decimal> gains = changes.Select(x => Math.Max(x, 0)).ToList();
-            List<decimal> losses = changes.Select(x => Math.Max(-x, 0)).ToList();
+            decimal avgGain = gainSum / (prices.Count - 1);
+            decimal avgLoss = lossSum / (prices.Count - 1);
 
-            decimal avgGain = gains.Average();
-            decimal avgLoss = losses.Average();
-
-            decimal rs;
-            if (avgLoss == 0)
-            {
-                rs = 0;
-            }
-            else
-            {
-                rs = avgGain / avgLoss;
-            }
-
+            // Calculate RSI
+            decimal rs = avgLoss != 0 ? avgGain / avgLoss : 0;
             decimal rsi = 100 - (100 / (1 + rs));
+
+
             return rsi;
         }
 
@@ -126,31 +126,43 @@ namespace test_binance_api.Repository.CoinRepository
         public async Task<List<decimal>> CalculateLastRSIs(string pair, int offset, int amount)
         {
             List<decimal> values = new List<decimal>();
-            /* DateTime date = DateTime.Now;
-             var prices = await GetPreviousPrices(pair, date, offset);
-             date.AddDays(-offset);
 
-             var value = await CalculateRSI(prices);
-             values.Add(value);
-             if (amount == 1)
-                 return values;
-             else
-             {
-                 for (int i = 0; i < amount - 1; i++)
-                 {
-                     prices.RemoveAt(0);
-                     prices.Add(await GetHistoricalPrice(pair, date));
-                     value = await CalculateRSI(prices);
-                     values.Add(value);
-                     date.AddDays(-1);
-                 }
+            DateTime date = DateTime.Now.AddDays(-1);
 
-             }
+            var prices = await GetPreviousPrices(pair, date, offset);
 
-             return prices;*/
+            for(int k =0; k<prices.Count; k++)
+                Console.Write(prices[k] + " ");
+            Console.WriteLine("");
+
+            var value = await CalculateRSI(prices);
+            Console.WriteLine("value = " + value);
+            values.Add(value);
+            if (amount == 1)
+                return values;
+            else
+            {
+                date = date.AddDays(-offset);
+                for (int i = 0; i < amount - 1; i++)
+                {
+                    prices.RemoveAt(0);
+                    prices.Add(await GetHistoricalPrice(pair, date));
+
+                    for (int k = 0; k < prices.Count; k++)
+                        Console.Write(prices[k] + " ");
+                    Console.WriteLine("");
+
+                    value = await CalculateRSI(prices);
+                    Console.WriteLine("value = " + value);
+                    values.Add(value);
+                    date = date.AddDays(-1);
+                }
+
+            }
+
             return values;
-        }
 
+        }
 
     }
 }

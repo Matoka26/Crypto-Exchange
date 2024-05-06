@@ -6,7 +6,6 @@
   
   <script setup>
   import { ref } from 'vue'
-  import TextInput from '../inputs/TextInput.vue'
   import LoginForm from '../forms/LoginForm.vue'
   
   defineProps({

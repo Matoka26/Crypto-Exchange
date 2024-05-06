@@ -22,6 +22,18 @@
                     }"    
                 />
 
+                <FormKit type="text" name="email" id="email" validation="required|not:Admin|email" label="Email"
+                    placeholder="patric@gmail.com"     
+                    :classes="{
+                        outer: 'mb-5',
+                        label: 'block mb-1 font-bold text-sm',
+                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+                        help: 'text-xs text-gray-500',
+                        message: 'text-red-500 text-sm'
+                    }"
+                />
+
                 <FormKit
                     type="password"
                     name="password"
@@ -29,6 +41,22 @@
                     label="Password"
                     help="Enter a new password"
                     validation="required"
+                    :classes="{
+                        outer: 'mb-5',
+                        label: 'block mb-1 font-bold text-sm',
+                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+                        help: 'text-xs text-gray-500',
+                        message: 'text-red-500 text-sm'
+                    }"
+                />
+                <FormKit
+                    type="password"
+                    name="password_confirm"
+                    label="Confirm password"
+                    help="Confirm your new password"
+                    validation="required|confirm"
+                    validation-label="Password confirmation"
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',

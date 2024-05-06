@@ -18,7 +18,9 @@
           </div>
           <!-- secondary nav -->
           <div class="hidden md:flex items-center space-x-1">
-              <RouterLink to="/login" class="py-2 px-3">Login</RouterLink>
+            <RouterLink to="/login" class="py-2 px-3">Login</RouterLink>
+            <RouterLink to="/register" class="py-2 px-3">Register</RouterLink>
+            <RouterLink to="/logout" class="py-2 px-3">Logout</RouterLink>
               <!-- <RouterLink to="/about" class="py-2 px-3">Go to About</RouterLink> -->
           </div>
           <!-- mobile button goes here -->

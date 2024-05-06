@@ -1,7 +1,6 @@
 <template>
     <div>
-      <!-- <p class="bg-red-500">TextInput!</p> -->
-      <FormKit type="text" />
+      <FormKit type="text"/>
     </div>
   </template>
   
@@ -14,5 +13,9 @@
   </script>
   
   <style scoped>
+  input{
+    border: 1px solid black;
+    border-radius: 2px;
+  }
   </style>
   

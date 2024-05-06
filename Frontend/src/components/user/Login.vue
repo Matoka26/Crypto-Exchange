@@ -1,13 +1,13 @@
 <template>
     <div>
-      <p class="bg-red-500">Login!</p>
-      <text-input></text-input>
+      <login-form></login-form>
     </div>
   </template>
   
   <script setup>
   import { ref } from 'vue'
   import TextInput from '../inputs/TextInput.vue'
+  import LoginForm from '../forms/LoginForm.vue'
   
   defineProps({
   })

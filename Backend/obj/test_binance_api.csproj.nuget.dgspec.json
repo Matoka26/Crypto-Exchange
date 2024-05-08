@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\Backend\\test_binance_api.csproj": {}
+    "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\Backend\\test_binance_api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\Backend\\test_binance_api.csproj": {
+    "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\Backend\\test_binance_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\Backend\\test_binance_api.csproj",
+        "projectUniqueName": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\Backend\\test_binance_api.csproj",
         "projectName": "test_binance_api",
-        "projectPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\Backend\\test_binance_api.csproj",
-        "packagesPath": "C:\\Users\\Mihai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\Backend\\obj\\",
+        "projectPath": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\Backend\\test_binance_api.csproj",
+        "packagesPath": "C:\\Users\\tiril\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Mihai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tiril\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj": {
-                "projectPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj"
+              "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\Mailing.Service.csproj": {
+                "projectPath": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\Mailing.Service.csproj"
               }
             }
           }
@@ -51,6 +51,10 @@
             "Binance.Spot": {
               "target": "Package",
               "version": "[4.0.1, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.5.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -102,21 +106,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj": {
+    "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\Mailing.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
+        "projectUniqueName": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\Mailing.Service.csproj",
         "projectName": "Mailing.Service",
-        "projectPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
-        "packagesPath": "C:\\Users\\Mihai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\obj\\",
+        "projectPath": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\Mailing.Service.csproj",
+        "packagesPath": "C:\\Users\\tiril\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Mihai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tiril\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -142,6 +146,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
             "NETCore.MailKit": {
               "target": "Package",
               "version": "[2.1.0, )"
@@ -163,7 +171,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -111,7 +111,7 @@ namespace test_binance_api.Controllers
 
 
         [HttpGet("ConfirmEmail")]
-        private async Task<IActionResult> ConfirmEmail(string token, string email)
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)

@@ -4,29 +4,31 @@
     <div>
       <apexchart width="500" type="bar" :options="options" :series="series"></apexchart>
     </div>
+    <div>
+      <candle-chart></candle-chart>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import CandleChart from './charts/CandleChart.vue';
 
 defineProps({
 })
 
-// Define your chart options
 const options = ref({
   chart: {
     id: 'vuechart-example'
   },
   xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997]  // Example categories
+    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997] 
   }
 })
 
-// Define the series data
 const series = ref([{
   name: 'series-1',
-  data: [30, 40, 35, 50, 49, 60, 70]  // Example data
+  data: [30, 40, 35, 50, 49, 60, 70]  
 }])
 
 </script>

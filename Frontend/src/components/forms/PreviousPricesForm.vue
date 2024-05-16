@@ -9,7 +9,7 @@
                     inputClass: 'border border-black py-1 px-4 rounded-md hover:bg-black hover:text-white',
                     wrapperClass: 'border-none',
                 }"
-                @submit="fetchRSIs"        
+                @submit="fetchPreviousPrices"        
             >
                 <FormKit type="text" name="pair" id="pair" validation="required|not:Admin" label="Pair"
                     placeholder="BTCUSDT" 
@@ -22,6 +22,45 @@
                         message: 'text-red-500 text-sm'
                     }"    
                     v-model="formData.pair"
+                />
+
+                <FormKit type="number" name="day" id="day" validation="required|not:Admin" label="Day"
+                    placeholder="5"     
+                    :classes="{
+                        outer: 'mb-5',
+                        label: 'block mb-1 font-bold text-sm',
+                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+                        help: 'text-xs text-gray-500',
+                        message: 'text-red-500 text-sm'
+                    }"
+                    v-model="formData.day"
+                />
+
+                <FormKit type="number" name="month" id="month" validation="required|not:Admin" label="Month"
+                    placeholder="5"     
+                    :classes="{
+                        outer: 'mb-5',
+                        label: 'block mb-1 font-bold text-sm',
+                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+                        help: 'text-xs text-gray-500',
+                        message: 'text-red-500 text-sm'
+                    }"
+                    v-model="formData.month"
+                />
+
+                <FormKit type="number" name="year" id="year" validation="required|not:Admin" label="Year"
+                    placeholder="2022"     
+                    :classes="{
+                        outer: 'mb-5',
+                        label: 'block mb-1 font-bold text-sm',
+                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+                        help: 'text-xs text-gray-500',
+                        message: 'text-red-500 text-sm'
+                    }"
+                    v-model="formData.year"
                 />
 
                 <FormKit type="number" name="offset" id="offset" validation="required|not:Admin" label="Offset"
@@ -37,18 +76,6 @@
                     v-model="formData.offset"
                 />
 
-                <FormKit type="number" name="amount" id="amount" validation="required|not:Admin" label="Amount"
-                    placeholder="20"     
-                    :classes="{
-                        outer: 'mb-5',
-                        label: 'block mb-1 font-bold text-sm',
-                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
-                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
-                        help: 'text-xs text-gray-500',
-                        message: 'text-red-500 text-sm'
-                    }"
-                    v-model="formData.amount"
-                />
             </FormKit>
             <p v-if="successMessage !== null" class="text-green-500 mt-4">{{ successMessage }}</p>
             <p v-if="errorMessage !== null" class="text-red-500 mt-4">{{ errorMessage }}</p>
@@ -65,26 +92,33 @@ defineProps({
 
 const emit = defineEmits(['dataGenerated'])
 
-const formData = ref({
-    pair: '',
-    offset: null,
-    amount: null,
-})
-
-const rsiData = ref([])
+const prices = ref([])
 
 const successMessage = ref(null)
 const errorMessage = ref(null)
 
 const apiBaseUrl = 'https://localhost:7286/api/Coin'
 
-// Function to call the CalculateRSIs endpoint
-async function fetchRSIs() {
+const formData = ref({
+    pair: '',
+    day: null,
+    month: null,
+    year: null,
+    offset: null,
+})
+
+async function fetchPreviousPrices() {
   try {
-    const response = await axios.get(`${apiBaseUrl}/CalculateRSIs/${formData.value.pair}/${formData.value.offset}/${formData.value.amount}`)
-    rsiData.value = response.data;  // Set the fetched data to rsiData
-    emit('dataGenerated', rsiData)
-    console.log('RSI values:', response.data);
+    const response = await axios.get(`${apiBaseUrl}/PreviousPrices/${formData.value.pair}/${formData.value.day}/${formData.value.month}/${formData.value.year}/${formData.value.offset}`, {
+        pair: formData.value.pair,
+        day: formData.value.day,
+        month: formData.value.month,
+        year: formData.value.year,
+        offset: formData.value.offset,
+    })
+    prices.value = response.data;  // Set the fetched data to rsiData
+    emit('dataGenerated', prices)
+    console.log('Previous prices:', response.data);
   } catch (error) {
     if (error.response) {
       // The request was made and the server responded with a status code

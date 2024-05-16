@@ -1,6 +1,6 @@
 <template>
     <div>
-      <rsi-form @data-generated="generateChart"></rsi-form>
+      <previous-prices-form @data-generated="generateChart"></previous-prices-form>
       <basic-chart :rsiValues="rsiValues"></basic-chart>
     </div>
   </template>
@@ -8,7 +8,7 @@
   <script setup>
   import { ref } from 'vue'
   import BasicChart from '../charts/BasicChart.vue'
-  import RsiForm from '../forms/RsiForm.vue'
+  import PreviousPricesForm from '../forms/PreviousPricesForm.vue';  
   
   const rsiValues = ref([])
   

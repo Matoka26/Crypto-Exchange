@@ -27,14 +27,14 @@
       type: 'line'
     },
     title: {
-      text: 'RSI Graph'
+      text: 'Graph'
     },
     xaxis: {
       categories: []
     },
     yaxis: {
       title: {
-        text: 'RSI'
+        text: 'Graph'
       }
     },
     stroke: {
@@ -52,7 +52,7 @@
   
   const series = ref([
     {
-      name: 'RSI',
+      name: 'Graph',
       data: []
     }
   ]);

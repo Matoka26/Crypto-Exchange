@@ -9,10 +9,10 @@
                     inputClass: 'border border-black py-1 px-4 rounded-md hover:bg-black hover:text-white',
                     wrapperClass: 'border-none',
                 }"
-                @submit="registerUser"        
+                @submit="fetchRSIs"        
             >
-                <FormKit type="text" name="name" id="name" validation="required|not:Admin" label="Name"
-                    placeholder="Tirila Patric" 
+                <FormKit type="text" name="pair" id="pair" validation="required|not:Admin" label="Pair"
+                    placeholder="BTCUSDT" 
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',
@@ -21,11 +21,11 @@
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
                     }"    
-                    v-model="formData.userName"
+                    v-model="formData.pair"
                 />
 
-                <FormKit type="text" name="email" id="email" validation="required|not:Admin|email" label="Email"
-                    placeholder="patric@gmail.com"     
+                <FormKit type="number" name="offset" id="offset" validation="required|not:Admin" label="Offset"
+                    placeholder="5"     
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',
@@ -34,16 +34,11 @@
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
                     }"
-                    v-model="formData.email"
+                    v-model="formData.offset"
                 />
 
-                <FormKit
-                    type="password"
-                    name="password"
-                    value=""
-                    label="Password"
-                    help="Enter a new password"
-                    validation="required"
+                <FormKit type="number" name="amount" id="amount" validation="required|not:Admin" label="Amount"
+                    placeholder="20"     
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',
@@ -52,7 +47,7 @@
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
                     }"
-                    v-model="formData.password"
+                    v-model="formData.amount"
                 />
             </FormKit>
             <p v-if="successMessage !== null" class="text-green-500 mt-4">{{ successMessage }}</p>
@@ -62,34 +57,34 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 import axios from 'axios';
 
 defineProps({
 })
 
+const emit = defineEmits(['dataGenerated'])
+
 const formData = ref({
-    userName: '',
-    email: '',
-    password: '',
+    pair: '',
+    offset: null,
+    amount: null,
 })
+
+const rsiData = ref([])
 
 const successMessage = ref(null)
 const errorMessage = ref(null)
 
-const apiBaseUrl = 'https://localhost:7286/signup';
+const apiBaseUrl = 'https://localhost:7286/api/Coin'
 
-async function registerUser() {
+// Function to call the CalculateRSIs endpoint
+async function fetchRSIs() {
   try {
-    const response = await axios.post(apiBaseUrl, {
-        userName: formData.value.userName,
-        email: formData.value.email,
-        password: formData.value.password,
-    });
-    // rsiData.value = response.data;  // Set the fetched data to rsiData
-    // console.log('RSI values:', response.data);
-    console.log(response)
-    successMessage.value = response.data.message
+    const response = await axios.get(`${apiBaseUrl}/CalculateRSIs/${formData.value.pair}/${formData.value.offset}/${formData.value.amount}`)
+    rsiData.value = response.data;  // Set the fetched data to rsiData
+    emit('dataGenerated', rsiData)
+    console.log('RSI values:', response.data);
   } catch (error) {
     if (error.response) {
       // The request was made and the server responded with a status code

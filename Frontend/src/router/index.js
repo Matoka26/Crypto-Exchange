@@ -1,6 +1,7 @@
 import { createRouter, createMemoryHistory } from 'vue-router';
 import Home from '../components/Home.vue';
 import CalculateRsi from '../components/coin/CalculateRsi.vue';
+import Candles from '../components/coin/Candles.vue';
 import LivePrice from '../components/coin/LivePrice.vue';
 import PreviousPrices from '../components/coin/PreviousPrices.vue';
 import About from '../components/About.vue';
@@ -48,6 +49,11 @@ const routes = [
     path: '/previous-prices',
     name: 'PreviousPrices',
     component: PreviousPrices,
+  },
+  {
+    path: '/candles',
+    name: 'Candles',
+    component: Candles,
   }
   // Add more routes here as needed
 ];

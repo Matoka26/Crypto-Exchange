@@ -15,6 +15,7 @@
               <RouterLink to="/" class="py-5 px-3">Go to Home</RouterLink>
               <RouterLink to="/about" class="py-5 px-3">Go to About</RouterLink>
               <RouterLink to="/calculate-rsi" class="py-5 px-3">Calculate RSIs</RouterLink>
+              <RouterLink to="/candles" class="py-5 px-3">Candles</RouterLink>
               <RouterLink to="/live-price" class="py-5 px-3">Live Price</RouterLink>
               <RouterLink to="/previous-prices" class="py-5 px-3">Previous Prices</RouterLink>
             </div>

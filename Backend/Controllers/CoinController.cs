@@ -5,6 +5,7 @@ using test_binance_api.Service.CoinService;
 using test_binance_api.Models;
 using System.ComponentModel;
 using System.Reflection;
+using test_binance_api.Service.CandleStickService;
 
 namespace test_binance_api.Controllers
 {
@@ -13,10 +14,12 @@ namespace test_binance_api.Controllers
     public class CoinController : ControllerBase
     {
         private readonly ICoinService _coinService;
+        private readonly ICandleStickService _candleStickService;
 
-        public CoinController(ICoinService coinService)
+        public CoinController(ICoinService coinService, ICandleStickService candleStickService)
         {
             _coinService = coinService;
+            _candleStickService = candleStickService;
         }
 
         [HttpGet("LivePrice/{pair}")]
@@ -70,6 +73,37 @@ namespace test_binance_api.Controllers
             {
                 var values = await _coinService.CalculateLastRSIs(pair, offset, amount);
                 return Ok(values);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Candle/{pair}/{day}/{month}/{year}/{interval}")]
+        public async Task<IActionResult> GetCandleStickData(string pair, int day, int month, int year, string interval)
+        {
+            try
+            {
+                DateTime date = new DateTime(year, month, day);
+                var candleStick = await _candleStickService.GetCandleStickData(pair, interval, date);
+                return Ok(candleStick);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Candles/{pair}/{interval}/{day}/{month}/{year}/{day2}/{month2}/{year2}")]
+        public async Task<IActionResult> GetAllCandles(string pair, string interval, int day, int month, int year, int day2, int month2, int year2)
+        {
+            try
+            {
+                DateTime startDate = new DateTime(year, month, day);
+                DateTime endDate = new DateTime(year2, month2, day2);
+                var candleStick = await _candleStickService.GetAllCandles(pair, interval, startDate, endDate);
+                return Ok(candleStick);
             }
             catch (Exception ex)
             {

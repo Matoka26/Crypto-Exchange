@@ -9,9 +9,16 @@ using Mailing.Service.Models;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<BinanceContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDbContext<BinanceContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlServerOptionsAction: sqlOptions =>
+        {
+            // Increase the maximum number of retries and adjust the delay between retries
+            sqlOptions.EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(10), errorNumbersToAdd: null);
+        });
+});
 
 builder.Services.AddIdentity<User, IdentityRole<Guid>>()
                 .AddRoles<IdentityRole<Guid>>()
@@ -43,6 +50,16 @@ builder.Services.AddServices();
 builder.Services.AddSeeder();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        builder => builder
+            .WithOrigins("http://localhost:5173")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 var app = builder.Build();
 SeedData(app);
 
@@ -53,6 +70,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Enable CORS
+app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 
@@ -73,6 +93,5 @@ void SeedData(IHost app)
 
         var userRoleService = scope.ServiceProvider.GetService<UserRoleSeeder>();
         userRoleService.SeedInitialUserRole();
-
     }
 }

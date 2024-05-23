@@ -84,6 +84,12 @@ namespace test_binance_api.Repository.CoinRepository
                 prices.Add(price);
             }
 
+            // Write to the console before returning prices
+            Console.WriteLine("Prices fetched successfully:");
+            foreach (var price in prices)
+            {
+                Console.WriteLine(price);
+            }
 
             return prices;
 

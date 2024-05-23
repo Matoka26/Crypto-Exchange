@@ -8,14 +8,10 @@ using System.Reflection;
 
 namespace test_binance_api.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
-
-
     public class CoinController : ControllerBase
     {
-
         private readonly ICoinService _coinService;
 
         public CoinController(ICoinService coinService)
@@ -23,9 +19,7 @@ namespace test_binance_api.Controllers
             _coinService = coinService;
         }
 
-
-
-        [HttpGet("LivePrice{pair}")]
+        [HttpGet("LivePrice/{pair}")]
         public async Task<IActionResult> GetLivePrice(string pair)
         {
             try
@@ -39,13 +33,11 @@ namespace test_binance_api.Controllers
             }
         }
 
-
-        [HttpGet("PreviousPrice{pair}/{day}/{month}/{year}")]
+        [HttpGet("PreviousPrice/{pair}/{day}/{month}/{year}")]
         public async Task<IActionResult> GetHistoricalPrice(string pair, int day, int month, int year)
         {
             try
             {
-
                 DateTime date = new DateTime(year, month, day);
                 var price = await _coinService.GetHistoricalPrice(pair, date);
                 return Ok(price);
@@ -56,15 +48,13 @@ namespace test_binance_api.Controllers
             }
         }
 
-
-        [HttpGet("PreviousPrices{pair}/{day}/{month}/{year}/{offset}")]
+        [HttpGet("PreviousPrices/{pair}/{day}/{month}/{year}/{offset}")]
         public async Task<IActionResult> GetPreviousPrices(string pair, int day, int month, int year, int offset)
         {
             try
             {
-
                 DateTime date = new DateTime(year, month, day);
-                var prices = await _coinService.GetPreviousPrices(pair, date,offset);
+                var prices = await _coinService.GetPreviousPrices(pair, date, offset);
                 return Ok(prices);
             }
             catch (Exception ex)
@@ -73,7 +63,7 @@ namespace test_binance_api.Controllers
             }
         }
 
-        [HttpGet("CalculateRSIs{pair}/{offset}/{amount}")]
+        [HttpGet("CalculateRSIs/{pair}/{offset}/{amount}")]
         public async Task<IActionResult> CalculateLastRSIs(string pair, int offset, int amount)
         {
             try
@@ -86,7 +76,6 @@ namespace test_binance_api.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }
 

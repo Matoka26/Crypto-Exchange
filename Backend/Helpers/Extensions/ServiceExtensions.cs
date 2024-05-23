@@ -13,6 +13,8 @@ using test_binance_api.Service.TradingService;
 using test_binance_api.Service.UserService;
 using test_binance_api.Service.UserWalletHistoryService;
 using Mailing.Service.Services;
+using test_binance_api.Repository.CandleStickRepository;
+using test_binance_api.Service.CandleStickService;
 
 namespace test_binance_api.Helpers.Extensions
 {
@@ -25,6 +27,7 @@ namespace test_binance_api.Helpers.Extensions
             services.AddTransient<ICoinRepository, CoinRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IWalletRepository, WalletRepository>();
+            services.AddTransient<ICandleStickRepository, CandleStickRepository>();
             services.AddScoped<UserManager<User>>();
             services.AddScoped<RoleManager<IdentityRole<Guid>>>();
             services.AddHttpClient();
@@ -38,6 +41,7 @@ namespace test_binance_api.Helpers.Extensions
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserWalletHistoryService, UserWalletHistoryService>();
             services.AddTransient<ITradingService, TradingService>();
+            services.AddTransient<ICandleStickService, CandleStickService>();
             services.AddScoped<IEmailService, EmailService>();
             
             return services;

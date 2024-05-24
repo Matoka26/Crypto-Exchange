@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using OpenAI_API.Completions;
 using OpenAI_API;
 
@@ -8,26 +8,34 @@ namespace test_binance_api.Controllers
     [ApiController]
     public class ChatGPTController : ControllerBase
     {
+        public IConfiguration Configuration { get; }
+
+        public ChatGPTController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         [HttpPost]
         public async Task<IActionResult> GetAIBasedResult(string searchText)
         {
             try
             {   
                 // Connection key for OpenAI API
-                string APIkey = "sk-proj-7BKYGDME92LvGdCmqo2fT3BlbkFJ1G5wLUQSiOyjww1ECxt7";
+                var apiKey = Configuration["ApiKeys:OpenAIKey"];
+
                 string answer = string.Empty;
 
-                var openai = new OpenAIAPI(APIkey);
+                var openai = new OpenAIAPI(apiKey);
                 CompletionRequest completion = new CompletionRequest();
                 
                 // Fill Fields for query
-                completion.Prompt = searchText;                         // text to search
-                completion.Model = OpenAI_API.Models.Model.DavinciText; // model to ask
-                completion.MaxTokens = 200;                             // max size to complete to
+                completion.Prompt = searchText;                                      // text to search
+                completion.Model = OpenAI_API.Models.Model.ChatGPTTurboInstruct;     // model to ask
+                completion.MaxTokens = 2000;                                         // max tokens of a batch(depending on model)
 
                 // Search for result
-                var result = openai.Completions.CreateCompletionsAsync(completion);
-                foreach (var item in result.Result.Completions)
+                var result = await openai.Completions.CreateCompletionsAsync(completion);
+                foreach (var item in result.Completions)
                 {
                     answer += item.Text;
                 }

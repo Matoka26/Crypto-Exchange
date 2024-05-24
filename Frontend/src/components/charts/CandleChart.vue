@@ -1,4 +1,79 @@
 <template>
+  <div class="max-w-4xl mx-auto mt-10">
+    <div id="chart" v-if="props.candlesData.length > 0"class="bg-white shadow-md rounded-lg p-4">
+      <apexchart 
+        type="candlestick" 
+        :options="chartOptions" 
+        :series="series"
+        class="w-full"
+      />
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted, watch, defineProps } from 'vue';
+
+const props = defineProps({
+  candlesData: {
+    type: Array,
+    default: () => []
+  }
+})
+
+const chartOptions = ref({
+  chart: {
+    height: 600,
+    type: 'candlestick'
+  },
+  title: {
+    text: 'Candlestick Chart'
+  },
+  xaxis: {
+    type: 'datetime',
+    categories: []
+  },
+  yaxis: {
+    title: {
+      text: 'Price'
+    }
+  }
+});
+
+const series = ref([
+  {
+    name: 'Candlestick',
+    data: []
+  }
+]);
+
+const updateChartData = () => {
+  if (props.candlesData && props.candlesData.length > 0) {
+    series.value[0].data = props.candlesData.map(candle => ({
+      x: new Date(candle.openTime).getTime(),
+      y: [candle.openPrice, candle.highPrice, candle.lowPrice, candle.closePrice]
+    }));
+    chartOptions.value.xaxis.categories = series.value[0].data.map(data => data.x);
+  }
+};
+
+onMounted(() => {
+  updateChartData();
+});
+
+watch(() => props.candlesData, () => {
+  updateChartData();
+}, { deep: true });
+</script>
+
+<style scoped>
+#chart {
+  max-width: 100%;
+}
+</style>
+
+
+<!-- <template>
     <div class="max-w-4xl mx-auto mt-10">
       <div id="chart" class="bg-white shadow-md rounded-lg p-4">
         <apexchart 
@@ -12,7 +87,11 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, defineProps } from 'vue';
+
+  const props = defineProps({
+    candlesData: Array,
+  })
   
   const chartOptions = ref({
     chart: {
@@ -76,4 +155,4 @@
     max-width: 100%;
   }
   </style>
-  
+   -->

@@ -6,8 +6,7 @@
             <!-- logo -->
             <div>
               <a href="#" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
-                <svg class="h-8 w-8 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0a20.038 20.038 0 018.381 8.381c.921 1.299.921 2.603 0 3.902a20.04 20.04 0 01-8.381 8.381c-1.299.921-2.603.921-3.902 0a20.04 20.04 0 01-8.381-8.381c-.921-1.299-.921-2.603 0-3.902a20.038 20.038 0 018.381-8.381z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13l-3-3-3 3m0-3h12"></path></svg>
-                <span class="font-bold">MyApp</span>
+                <span class="font-bold">CryptoPredict</span>
               </a>
             </div>
             <!-- primary nav -->

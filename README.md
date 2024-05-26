@@ -36,12 +36,16 @@ So that I can easily navigate the application and have a pleasant experience whi
 As a user, I want the application to respond rapidly to my requests for data retrieval, analysis, and transactions,
 So that I can make timely decisions and take actions without experiencing delays or interruptions.  
 
+11. <b>Coins info</b>  
+As a user, I want to see informations about crypto currencies 
+of my interest, such as graphs of price fluctuation
+
 ## Tasks:
 1. <b>Enter app:</b> 
     - [x] SignUp 
     - [x] LogIn 
     - [x] LogOut
-    - [ ] Send verification token
+    - [x] Send verification token
     - [x] Sending email
 
 2. <b>Dashboard:</b>
@@ -50,14 +54,14 @@ So that I can make timely decisions and take actions without experiencing delays
     - [ ] Lookup other users
  
 3. <b>Real-time data:</b>
-    - [ ] Use [Binance API](https://binance-docs.github.io/apidocs/spot/en/#introduction)
+    - [x] Use [Binance API](https://binance-docs.github.io/apidocs/spot/en/#introduction)
 
 4. <b>Banking system:</b>
     - [ ] Deposit money
     - [ ] Withdraw money
 
 5. <b>ChatGPT:</b>
-    - [ ] Use [ChatGPT API](https://platform.openai.com/docs/guides/text-generation) 
+    - [x] Use [ChatGPT API](https://platform.openai.com/docs/guides/text-generation) 
 
 6. <b>Transfer between users:</b>
     - [ ] Trading with other users
@@ -72,8 +76,9 @@ So that I can make timely decisions and take actions without experiencing delays
     - [ ] Design it relative to the view port
 
 9. <b>Clean interface:</b> 
-    - [ ] Look for color pallets that inspire "money" i guess
-    - [ ] Make the buttons as accessible as possible and intuitive
+    - [x] Make the buttons as accessible as possible and intuitive
+    - [x] Design app logo
 
-10. <b>Quick render:</b>
-    - [ ] Make it quick :) 
+10. <b>Display charts</b>
+    - [x] Candle Sticks
+    - [x] Others

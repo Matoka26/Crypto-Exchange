@@ -313,7 +313,6 @@ C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\
 C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\NETCore.MailKit.dll
 C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\OpenAI_API.dll
-C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\BouncyCastle.Crypto.dll
 C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -554,3 +553,7 @@ C:\Users\Latitude 5440\source\repos\cryptoandrei\Backend\obj\Debug\net7.0\refint
 C:\Users\Latitude 5440\source\repos\cryptoandrei\Backend\obj\Debug\net7.0\test_binance_api.pdb
 C:\Users\Latitude 5440\source\repos\cryptoandrei\Backend\obj\Debug\net7.0\test_binance_api.genruntimeconfig.cache
 C:\Users\Latitude 5440\source\repos\cryptoandrei\Backend\obj\Debug\net7.0\ref\test_binance_api.dll
+C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\System.Formats.Asn1.dll
+C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Mihai\Desktop\chestii\facultate shit\repos\Crypto-Exchange\Backend\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll

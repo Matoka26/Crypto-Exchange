@@ -424,19 +424,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tiril\\.nuget\\packages\\": {}
+    "C:\\Users\\Mihai\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\Mailing.Service.csproj",
+      "projectUniqueName": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
       "projectName": "Mailing.Service",
-      "projectPath": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\Mailing.Service.csproj",
-      "packagesPath": "C:\\Users\\tiril\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tiril\\source\\repos\\Crypto-Project\\User.Mailing.Service\\obj\\",
+      "projectPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
+      "packagesPath": "C:\\Users\\Mihai\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mihai\\Desktop\\chestii\\facultate shit\\repos\\Crypto-Exchange\\User.Mailing.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tiril\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mihai\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -487,7 +487,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

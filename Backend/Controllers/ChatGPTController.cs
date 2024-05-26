@@ -16,7 +16,7 @@ namespace test_binance_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetAIBasedResult(string searchText)
+        public async Task<IActionResult> GetAIBasedResult(string searchText, int maxTokens)
         {
             try
             {   
@@ -31,7 +31,7 @@ namespace test_binance_api.Controllers
                 // Fill Fields for query
                 completion.Prompt = searchText;                                      // text to search
                 completion.Model = OpenAI_API.Models.Model.ChatGPTTurboInstruct;     // model to ask
-                completion.MaxTokens = 2000;                                         // max tokens of a batch(depending on model)
+                completion.MaxTokens = maxTokens;                                         // max tokens of a batch(depending on model)
 
                 // Search for result
                 var result = await openai.Completions.CreateCompletionsAsync(completion);

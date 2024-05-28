@@ -4,6 +4,7 @@ import CalculateRsi from '../components/coin/CalculateRsi.vue';
 import Candles from '../components/coin/Candles.vue';
 import LivePrice from '../components/coin/LivePrice.vue';
 import PreviousPrices from '../components/coin/PreviousPrices.vue';
+import PreviousPrice from '../components/coin/PreviousPrice.vue';
 import About from '../components/About.vue';
 import Register from '../components/user/Register.vue';
 import Login from '../components/user/Login.vue';
@@ -49,6 +50,11 @@ const routes = [
     path: '/previous-prices',
     name: 'PreviousPrices',
     component: PreviousPrices,
+  },
+  {
+    path: '/previous-price',
+    name: 'PreviousPrice',
+    component: PreviousPrice,
   },
   {
     path: '/candles',

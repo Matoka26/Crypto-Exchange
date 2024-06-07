@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-4xl mx-auto mt-10">
-    <div id="chart" v-if="props.candlesData.length > 0"class="bg-white shadow-md rounded-lg p-4">
+  <div :class="'w-[50rem] mx-auto mt-10' + classes"> <!-- class="max-w-4xl mx-auto mt-10 -->
+    <div id="chart" v-if="props.candlesData.length > 0" class="bg-white shadow-md rounded-lg p-4">
       <apexchart 
         type="candlestick" 
         :options="chartOptions" 
@@ -18,6 +18,9 @@ const props = defineProps({
   candlesData: {
     type: Array,
     default: () => []
+  }, 
+  classes: {
+    type: String,
   }
 })
 

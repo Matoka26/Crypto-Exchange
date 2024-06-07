@@ -5,6 +5,7 @@ import Candles from '../components/coin/Candles.vue';
 import LivePrice from '../components/coin/LivePrice.vue';
 import PreviousPrices from '../components/coin/PreviousPrices.vue';
 import Coin from '../components/coin/Coin.vue';
+import Profile from '../components/user/Profile.vue';
 import About from '../components/About.vue';
 import Register from '../components/user/Register.vue';
 import Login from '../components/user/Login.vue';
@@ -35,6 +36,11 @@ const routes = [
     path: '/logout',
     name: 'Logout',
     component: Logout
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
   },
   {
     path: '/calculate-rsi',

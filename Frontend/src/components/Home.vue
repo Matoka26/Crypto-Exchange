@@ -1,35 +1,90 @@
 <template>
-  <div>
-    <p class="bg-red-500">HOME!</p>
-    <div>
-      <apexchart width="500" type="bar" :options="options" :series="series"></apexchart>
-    </div>
-    <div>
-      <candle-chart></candle-chart>
-    </div>
+  <div class="flex flex-col justify-center items-center">
+    <coin-list :coins="coins"></coin-list>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import CandleChart from './charts/CandleChart.vue';
+import CoinList from './coin/CoinList.vue'
 
 defineProps({
 })
 
-const options = ref({
-  chart: {
-    id: 'vuechart-example'
+const coins = ref([
+  {
+    name: 'Bitcoin',
+    symbol: 'BTC',
+    marketCap: '850B',
+    currentPrice: '45000',
   },
-  xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997] 
-  }
-})
-
-const series = ref([{
-  name: 'series-1',
-  data: [30, 40, 35, 50, 49, 60, 70]  
-}])
+  {
+    name: 'Ethereum',
+    symbol: 'ETH',
+    marketCap: '400B',
+    currentPrice: '3000',
+  },
+  {
+    name: 'Binance Coin',
+    symbol: 'BNB',
+    marketCap: '85B',
+    currentPrice: '500',
+  },
+  {
+    name: 'Cardano',
+    symbol: 'ADA',
+    marketCap: '70B',
+    currentPrice: '2.1',
+  },
+  {
+    name: 'Solana',
+    symbol: 'SOL',
+    marketCap: '55B',
+    currentPrice: '180',
+  },
+  {
+    name: 'Polkadot',
+    symbol: 'DOT',
+    marketCap: '30B',
+    currentPrice: '30',
+  },
+  {
+    name: 'Dogecoin',
+    symbol: 'DOGE',
+    marketCap: '40B',
+    currentPrice: '0.3',
+  },
+  {
+    name: 'XRP',
+    symbol: 'XRP',
+    marketCap: '60B',
+    currentPrice: '1.2',
+  },
+  {
+    name: 'Chainlink',
+    symbol: 'LINK',
+    marketCap: '12B',
+    currentPrice: '25',
+  },
+  {
+    name: 'Litecoin',
+    symbol: 'LTC',
+    marketCap: '15B',
+    currentPrice: '200',
+  },
+  {
+    name: 'Uniswap',
+    symbol: 'UNI',
+    marketCap: '14B',
+    currentPrice: '25',
+  },
+  {
+    name: 'Avalanche',
+    symbol: 'AVAX',
+    marketCap: '10B',
+    currentPrice: '50',
+  },
+]);
 
 </script>
 

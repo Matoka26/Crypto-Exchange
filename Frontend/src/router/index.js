@@ -4,6 +4,8 @@ import CalculateRsi from '../components/coin/CalculateRsi.vue';
 import Candles from '../components/coin/Candles.vue';
 import LivePrice from '../components/coin/LivePrice.vue';
 import PreviousPrices from '../components/coin/PreviousPrices.vue';
+import Coin from '../components/coin/Coin.vue';
+import Profile from '../components/user/Profile.vue';
 import About from '../components/About.vue';
 import Register from '../components/user/Register.vue';
 import Login from '../components/user/Login.vue';
@@ -36,6 +38,11 @@ const routes = [
     component: Logout
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  },
+  {
     path: '/calculate-rsi',
     name: 'CalculateRsi',
     component: CalculateRsi
@@ -54,6 +61,12 @@ const routes = [
     path: '/candles',
     name: 'Candles',
     component: Candles,
+  },
+  {
+    path: '/coin/:symbol',
+    name: 'Coin',
+    component: Coin,
+    props: true
   }
   // Add more routes here as needed
 ];

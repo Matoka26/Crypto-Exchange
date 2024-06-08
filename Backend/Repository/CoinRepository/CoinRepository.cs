@@ -1,14 +1,16 @@
 ﻿using Newtonsoft.Json.Linq;
 using test_binance_api.Models;
-
+using test_binance_api.Repository.GenericRepository;
+using test_binance_api.Data;
+using test_binance_api.Models.Errors;
 
 namespace test_binance_api.Repository.CoinRepository
 {
-    public class CoinRepository : ICoinRepository
+    public class CoinRepository : GenericRepository<Coin>, ICoinRepository
     {
         public readonly IHttpClientFactory _clientFactory;
 
-        public CoinRepository(IHttpClientFactory clientFactory)
+        public CoinRepository(BinanceContext binanceContext, IHttpClientFactory clientFactory) : base(binanceContext)
         {
             _clientFactory = clientFactory;
         }
@@ -23,6 +25,59 @@ namespace test_binance_api.Repository.CoinRepository
             var priceResponse = await response.Content.ReadFromJsonAsync<Coin>();
 
             return (decimal)priceResponse.Price;
+        }
+
+        public async Task<decimal> GetMarketCapAsync(string symbol)
+        {
+
+            symbol = symbol.ToUpperInvariant();
+            string lastFourCharacters = symbol.Substring(symbol.Length - 4);
+
+            if (lastFourCharacters.Equals("Usdt", StringComparison.OrdinalIgnoreCase))
+            {
+                // If the last 4 characters are "Usdt", delete them
+                symbol =  symbol.Substring(0, symbol.Length - 4);
+            }
+            else if (symbol.Length >= 3)
+            {
+                // Get the last 3 characters of the input string
+                string lastThreeCharacters = symbol.Substring(symbol.Length - 3);
+
+                // Check if the last 3 characters are "eur", "usdt", or "ron"
+                if (lastThreeCharacters.Equals("eur", StringComparison.OrdinalIgnoreCase) ||
+                    lastThreeCharacters.Equals("usdt", StringComparison.OrdinalIgnoreCase) ||
+                    lastThreeCharacters.Equals("ron", StringComparison.OrdinalIgnoreCase))
+                {
+                    // If yes, delete the last 3 characters
+                    symbol =  symbol.Substring(0, symbol.Length - 3);
+                }
+            }
+
+            string cryptoCompareApiUrl = $"https://min-api.cryptocompare.com/data/pricemultifull?fsyms={symbol}&tsyms=USD";
+
+            var client = _clientFactory.CreateClient();
+
+            // Get the market data from CryptoCompare
+            var cryptoCompareResponse = await client.GetAsync(cryptoCompareApiUrl);
+            if (!cryptoCompareResponse.IsSuccessStatusCode)
+            {
+                throw new Exception($"Error: {cryptoCompareResponse.ReasonPhrase}");
+            }
+            var cryptoCompareContent = await cryptoCompareResponse.Content.ReadAsStringAsync();
+            var cryptoCompareJson = JObject.Parse(cryptoCompareContent);
+
+            // Extract the market cap from the response
+            try 
+            {
+                decimal marketCap = (decimal)cryptoCompareJson["RAW"][symbol]["USD"]["MKTCAP"];
+                return marketCap;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Pair not found");
+            }
+            
+            
         }
 
 

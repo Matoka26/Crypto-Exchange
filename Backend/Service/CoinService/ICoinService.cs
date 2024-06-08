@@ -9,5 +9,9 @@ namespace test_binance_api.Service.CoinService
         Task<decimal> GetHistoricalPrice(string pair, DateTime date);
         Task<List<decimal>> GetPreviousPrices(string pair, DateTime date, int offset);
         Task<List<decimal>> CalculateLastRSIs(string pair, int offset, int amount);
+        Task<List<CoinShowDTO>> GetAll();
+        Task CreateCoin(CoinCreateDTO coin);
+        Task<decimal> GetMarketCap(string pair);
+        Task RefreshCoins();
     }
 }

@@ -24,6 +24,13 @@ namespace test_binance_api.Helpers
 
             CreateMap<Coin, CoinDTO>();
             CreateMap<CoinDTO, Coin>();
+
+            CreateMap<Coin, CoinCreateDTO>();
+            CreateMap<CoinCreateDTO, Coin>();
+
+
+            CreateMap<Coin, CoinShowDTO>();
+            CreateMap<CoinShowDTO, Coin>();
         }
 
     }

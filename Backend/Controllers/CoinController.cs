@@ -6,6 +6,7 @@ using test_binance_api.Models;
 using System.ComponentModel;
 using System.Reflection;
 using test_binance_api.Service.CandleStickService;
+using test_binance_api.Models.Errors;
 
 namespace test_binance_api.Controllers
 {
@@ -29,6 +30,20 @@ namespace test_binance_api.Controllers
             {
                 var price = await _coinService.GetLivePrice(pair);
                 return Ok(price);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("LiveMarketCap/{pair}")]
+        public async Task<IActionResult> GetMarketCap(string pair)
+        {
+            try
+            {
+                var value = await _coinService.GetMarketCap(pair);
+                return Ok(value);
             }
             catch (Exception ex)
             {
@@ -108,6 +123,50 @@ namespace test_binance_api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllCoins()
+        {
+            var coins = await _coinService.GetAll();
+            return Ok(coins);
+        }
+
+        [HttpPost("CreateCoin")]
+        public async Task<IActionResult> AddCoin(CoinCreateDTO coin)
+        {
+            try 
+            {
+                await _coinService.CreateCoin(coin);
+                return Ok();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(new ErrorResponse()
+                {
+                    StatusCode = 500,
+                    Message = exception.Message
+                });
+            }
+        }
+
+        [HttpPost("Refresh")]
+        public async Task<IActionResult> Refresh()
+        {
+            try
+            {
+                await _coinService.RefreshCoins();
+                return Ok();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(new ErrorResponse()
+                {
+                    StatusCode = 500,
+                    Message = exception.Message
+                });
             }
         }
     }

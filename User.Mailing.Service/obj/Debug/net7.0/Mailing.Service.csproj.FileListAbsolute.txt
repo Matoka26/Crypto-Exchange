@@ -47,3 +47,15 @@ C:\Users\Latitude 5440\source\repos\cryptoandrei\User.Mailing.Service\obj\Debug\
 C:\Users\Latitude 5440\source\repos\cryptoandrei\User.Mailing.Service\obj\Debug\net7.0\refint\Mailing.Service.dll
 C:\Users\Latitude 5440\source\repos\cryptoandrei\User.Mailing.Service\obj\Debug\net7.0\Mailing.Service.pdb
 C:\Users\Latitude 5440\source\repos\cryptoandrei\User.Mailing.Service\obj\Debug\net7.0\ref\Mailing.Service.dll
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\bin\Debug\net7.0\Mailing.Service.deps.json
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\bin\Debug\net7.0\Mailing.Service.dll
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\bin\Debug\net7.0\Mailing.Service.pdb
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\Mailing.Service.csproj.AssemblyReference.cache
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\Mailing.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\Mailing.Service.AssemblyInfoInputs.cache
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\Mailing.Service.AssemblyInfo.cs
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\Mailing.Service.csproj.CoreCompileInputs.cache
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\Mailing.Service.dll
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\refint\Mailing.Service.dll
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\Mailing.Service.pdb
+C:\Users\Latitude 5440\Documents\GitHub\crypp\Crypto-Exchange\User.Mailing.Service\obj\Debug\net7.0\ref\Mailing.Service.dll

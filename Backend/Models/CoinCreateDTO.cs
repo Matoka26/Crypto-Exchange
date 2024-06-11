@@ -2,6 +2,7 @@
 {
     public class CoinCreateDTO
     {
+        public string? Name { get; set; }
         public string? Symbol { get; set; }
     }
 }

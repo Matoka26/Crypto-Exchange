@@ -22,6 +22,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin1 = new Coin
                 {
+                    Name = "BTC",
                     Symbol = "BTCUSDT",
                     Price = 0,
                     MarketCap = 0
@@ -29,6 +30,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin2 = new Coin
                 {
+                    Name = "FTM",
                     Symbol = "FTMUSDT",
                     Price = 0,
                     MarketCap = 0
@@ -36,6 +38,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin3 = new Coin
                 {
+                    Name = "EGLD",
                     Symbol = "EGLDUSDT",
                     Price = 0,
                     MarketCap = 0
@@ -43,6 +46,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin4 = new Coin
                 {
+                    Name = "SOL",
                     Symbol = "SOLUSDT",
                     Price = 0,
                     MarketCap = 0
@@ -50,6 +54,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin5 = new Coin
                 {
+                    Name = "DOGE", 
                     Symbol = "DOGEUSDT",
                     Price = 0,
                     MarketCap = 0
@@ -57,6 +62,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin6 = new Coin
                 {
+                    Name = "BNB",
                     Symbol = "BNBUSDT",
                     Price = 0,
                     MarketCap = 0
@@ -64,6 +70,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin7 = new Coin
                 {
+                    Name = "FIL",
                     Symbol = "FILUSDT",
                     Price = 0,
                     MarketCap = 0
@@ -71,6 +78,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin8 = new Coin
                 {
+                    Name = "MATIC",
                     Symbol = "MATICUSDT",
                     Price = 0,
                     MarketCap = 0
@@ -78,6 +86,7 @@ namespace test_binance_api.Helpers.Seeders
 
                 var coin9 = new Coin
                 {
+                    Name = "ETH",
                     Symbol = "ETHUSDT",
                     Price = 0,
                     MarketCap = 0

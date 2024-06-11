@@ -180,6 +180,9 @@ namespace test_binance_api.Migrations
                     b.Property<decimal?>("MarketCap")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 

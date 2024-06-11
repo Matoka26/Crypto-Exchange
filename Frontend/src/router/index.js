@@ -77,6 +77,10 @@ const routes = [
   // Add more routes here as needed
 ];
 
+function isAuthenticated() {
+  return localStorage.getItem('user') !== null;
+}
+
 const router = createRouter({
     history: createMemoryHistory(),
     routes

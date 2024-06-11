@@ -1,15 +1,33 @@
 <template>
   <div class="flex flex-col justify-center items-center">
-    <coin-list :coins="coins"></coin-list>
+    <coin-list :coins="coinsList"></coin-list>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import CoinList from './coin/CoinList.vue'
+import axios from 'axios'
 
 defineProps({
 })
+
+const coinsEndpoint = ref('https://localhost:7286/api/Coin/GetAll');
+const coinsList = ref();
+
+onMounted(() => {
+  getCoins()
+})
+
+async function getCoins() {
+  try {
+    const response = await axios.get(`${coinsEndpoint.value}`)
+    coinsList.value = response.data
+    console.log("COINS LIST:", coinsList.value)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const coins = ref([
   {

@@ -38,6 +38,7 @@ namespace test_binance_api.Service.UserService
         public async Task<UserDTO> CreateAsync(UserCreateDTO user)
         {
             var newUser = _mapper.Map<User>(user);
+            Console.WriteLine(newUser.PasswordHash);
             await _userRepository.CreateAsync(newUser);
             return _mapper.Map<UserDTO>(newUser);
         }
@@ -112,6 +113,12 @@ namespace test_binance_api.Service.UserService
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(email, isPersistent: true);
+
+
+                User user = await _userRepository.GetUserById(email.Id);
+                user.Consent = true;
+                await _userRepository.Update(user);
+
                 return email.Id;
             }
 

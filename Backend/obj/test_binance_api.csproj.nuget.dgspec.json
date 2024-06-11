@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\Backend\\test_binance_api.csproj": {}
+    "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\Backend\\test_binance_api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\Backend\\test_binance_api.csproj": {
+    "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\Backend\\test_binance_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\Backend\\test_binance_api.csproj",
+        "projectUniqueName": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\Backend\\test_binance_api.csproj",
         "projectName": "test_binance_api",
-        "projectPath": "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\Backend\\test_binance_api.csproj",
-        "packagesPath": "C:\\Users\\Latitude 5440\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\Backend\\obj\\",
+        "projectPath": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\Backend\\test_binance_api.csproj",
+        "packagesPath": "C:\\Users\\rzvan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Vs Community\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Latitude 5440\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rzvan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,15 +26,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj": {
-                "projectPath": "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj"
+              "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj": {
+                "projectPath": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj"
               }
             }
           }
@@ -111,24 +110,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj": {
+    "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
+        "projectUniqueName": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
         "projectName": "Mailing.Service",
-        "projectPath": "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
-        "packagesPath": "C:\\Users\\Latitude 5440\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Latitude 5440\\Documents\\GitHub\\crypp\\Crypto-Exchange\\User.Mailing.Service\\obj\\",
+        "projectPath": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\User.Mailing.Service\\Mailing.Service.csproj",
+        "packagesPath": "C:\\Users\\rzvan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\github_actual\\Crypto-Exchange\\User.Mailing.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Vs Community\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Latitude 5440\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rzvan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -137,7 +136,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -181,7 +179,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

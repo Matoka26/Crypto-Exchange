@@ -52,6 +52,7 @@ namespace test_binance_api.Helpers.Extensions
             services.AddTransient<UserSeeder>();
             services.AddTransient<RoleSeeder>();
             services.AddTransient<UserRoleSeeder>();
+            services.AddTransient<CoinSeeder>();
 
             return services;
         }

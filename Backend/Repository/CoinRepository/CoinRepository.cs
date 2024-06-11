@@ -16,6 +16,9 @@ namespace test_binance_api.Repository.CoinRepository
         }
 
 
+
+        //used Binance REST Api to get the live price
+        //must receive a valid pair <coin symbol + fiat currency>
         public async Task<decimal> GetLivePrice(string pair)
         {
             pair = pair.ToUpperInvariant();
@@ -27,6 +30,10 @@ namespace test_binance_api.Repository.CoinRepository
             return (decimal)priceResponse.Price;
         }
 
+
+        //used CryptoCompare REST Api to get the market capitalization for a crypto currency
+        //must receive a valid pair <coin symbol + fiat currency>
+        //used ChatGPT for parsing
         public async Task<decimal> GetMarketCapAsync(string symbol)
         {
 
@@ -80,7 +87,9 @@ namespace test_binance_api.Repository.CoinRepository
             
         }
 
-
+        //used Binance REST Api to get price from the past
+        //used ChatGPT for parsing
+        //must receive a valid pair <coin symbol + fiat currency>
         public async Task<decimal> GetHistoricalPrice(string pair, DateTime date)
         {
 
@@ -128,6 +137,9 @@ namespace test_binance_api.Repository.CoinRepository
 
         }
 
+        //function that gets all the prices from a range(given date -> given date - offset)
+        //using GetHistoricalPrice
+        //must receive a valid pair <coin symbol + fiat currency> a valid date and a positive offset
         public async Task<List<decimal>> GetPreviousPrices(string pair, DateTime date, int offset)
         {
             List<decimal> prices = new List<decimal>();
@@ -151,7 +163,7 @@ namespace test_binance_api.Repository.CoinRepository
         }
 
 
-
+        //function that calculate the rsi index value for a range of prices
         public async Task<decimal> CalculateRSI(List<decimal> prices)
         {
 
@@ -183,7 +195,9 @@ namespace test_binance_api.Repository.CoinRepository
             return rsi;
         }
 
-
+        //function that gets previous prices from today to a calculated date and retuns a list of rsi values
+        //must receive a valid pair <coin symbol + fiat currency>
+        //must receive a positive offset and amount
         public async Task<List<decimal>> CalculateLastRSIs(string pair, int offset, int amount)
         {
             List<decimal> values = new List<decimal>();

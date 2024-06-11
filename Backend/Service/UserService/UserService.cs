@@ -34,7 +34,7 @@ namespace test_binance_api.Service.UserService
             _emailService = emailService;
         }
 
-
+        //create
         public async Task<UserDTO> CreateAsync(UserCreateDTO user)
         {
             var newUser = _mapper.Map<User>(user);
@@ -42,6 +42,8 @@ namespace test_binance_api.Service.UserService
             return _mapper.Map<UserDTO>(newUser);
         }
 
+
+        //find
         public async Task<UserDTO> GetUserById(Guid id)
         {
             var user = await _userRepository.GetUserById(id);
@@ -49,6 +51,8 @@ namespace test_binance_api.Service.UserService
             return _mapper.Map<UserDTO>(user);
         }
 
+
+        //get all
         public async Task<List<UserDTO>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetUsersAsync();
@@ -61,6 +65,8 @@ namespace test_binance_api.Service.UserService
             await _userRepository.Delete(id);
         }
 
+
+        //update
         public async Task<UserDTO> Update(UserUpdateDTO user)
         {
             var existingUser = await _userRepository.GetUserById(user.Id);
@@ -99,6 +105,7 @@ namespace test_binance_api.Service.UserService
 
             throw new Exception("Wrong password");
         }
+
 
         public async Task Logout()
         {

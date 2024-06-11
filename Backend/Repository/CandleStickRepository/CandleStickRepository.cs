@@ -12,6 +12,12 @@ namespace test_binance_api.Repository.CandleStickRepository
             _clientFactory = clientFactory;
         }
 
+
+        //function that get all the data from a single candlestick (market data within a given interval) from a certain date
+        //must receive a valid pair <coin symbol + fiat currency>
+        //must receive a valid StartDate
+        //must receive a valid interval (1m, 15m, 1h, 3d, 1w, etc.)
+        //parsed using ChatGPT
         public async Task<CandleStick>? GetCandleStickData(string pair, string interval, DateTime startDate)
         {
             pair = pair.ToUpperInvariant();
@@ -40,6 +46,9 @@ namespace test_binance_api.Repository.CandleStickRepository
             return candleStick;
         }
 
+
+        //function that gets information about all the candles within a range of dates
+        //using GetCandleStickData()
         public async Task<List<CandleStick>>? GetAllCandles(string pair, string interval, DateTime startDate, DateTime endDate)
         {
             var number = int.Parse(interval.Substring(0, interval.Length - 1));

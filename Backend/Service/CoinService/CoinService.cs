@@ -17,24 +17,30 @@ namespace test_binance_api.Service.CoinService
             _mapper = mapper;
         }
 
+        //live price of a pair
         public async Task<decimal> GetLivePrice(string pair)
         {
             var price = await _coinRepository.GetLivePrice(pair);
             return price;
         }
 
+        //market capitalization of a pair
         public async Task<decimal> GetMarketCap(string pair)
         {
             var value = await _coinRepository.GetMarketCapAsync(pair);
             return value;
         }
 
+
+        //price from past of a pair
         public async Task<decimal> GetHistoricalPrice(string pair, DateTime date)
         {
             var price = await _coinRepository.GetHistoricalPrice(pair, date);
             return price;
         }
 
+
+        //range of prices from past of a pair
         public async Task<List<decimal>> GetPreviousPrices(string pair, DateTime date, int offset)
 
         {
@@ -42,12 +48,15 @@ namespace test_binance_api.Service.CoinService
             return prices;
         }
 
+        //get rsi values for a pair
         public async Task<List<decimal>> CalculateLastRSIs(string pair, int offset, int amount)
         {
             var values = await _coinRepository.CalculateLastRSIs(pair, offset, amount);
             return values;
         }
 
+
+        //create(+ getting live info)
         public async Task CreateCoin(CoinCreateDTO coin)
         {
             string pair = coin.Symbol;
@@ -57,6 +66,8 @@ namespace test_binance_api.Service.CoinService
             await _coinRepository.CreateAsync(vcoin);
         }
 
+
+        //get all
         public async Task<List<CoinShowDTO>> GetAll()
         {
             var coins = await _coinRepository.GetAllAsync();
@@ -64,6 +75,7 @@ namespace test_binance_api.Service.CoinService
         }
 
 
+        //update all info from database
         public async Task RefreshCoins()
         {
             var coins = await _coinRepository.GetAllAsync();

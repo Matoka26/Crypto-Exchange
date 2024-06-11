@@ -20,6 +20,7 @@ builder.Services.AddDbContext<BinanceContext>(options =>
         });
 });
 
+//used identity for user
 builder.Services.AddIdentity<User, IdentityRole<Guid>>()
                 .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<BinanceContext>()
@@ -80,6 +81,8 @@ app.MapControllers();
 
 app.Run();
 
+
+//seeding the app
 void SeedData(IHost app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
@@ -90,6 +93,9 @@ void SeedData(IHost app)
 
         var roleService = scope.ServiceProvider.GetService<RoleSeeder>();
         roleService.SeedInitialRoles();
+
+        var coinService = scope.ServiceProvider.GetService<CoinSeeder>();
+        coinService.SeedInitialCoins();
 
         var userRoleService = scope.ServiceProvider.GetService<UserRoleSeeder>();
         userRoleService.SeedInitialUserRole();

@@ -12,6 +12,7 @@ namespace test_binance_api.Repository.UserRepository
             _userManager = userMananger;
         }
 
+        //create
         public async Task CreateAsync(User user)
         {
             var result = await _userManager.CreateAsync(user);
@@ -24,6 +25,8 @@ namespace test_binance_api.Repository.UserRepository
             throw new Exception(result.Errors.First().Description);
         }
 
+
+        //find
         public async Task<User> GetUserById(Guid id)
         {
             return await _userManager.FindByIdAsync(id.ToString());
@@ -34,6 +37,8 @@ namespace test_binance_api.Repository.UserRepository
             return await _userManager.Users.ToListAsync();
         }
 
+
+        //delete
         public async Task Delete(Guid userId)
         {
             var existingUser = await GetUserById(userId);
@@ -47,6 +52,8 @@ namespace test_binance_api.Repository.UserRepository
                 throw new Exception("User delete failed");
         }
 
+
+        //update
         public async Task Update(User user)
         {
             user.SecurityStamp = Guid.NewGuid().ToString();

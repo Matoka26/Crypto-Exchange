@@ -16,7 +16,7 @@
               outer: 'mb-5',
               label: 'block mb-1 font-bold text-sm',
               inner: 'w-full mb-1',
-              input: 'w-full h-10 px-3 text-base text-gray-700 placeholder-gray-400 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200',
+              input: 'w-full h-10 px-3 text-base text-gray-700 placeholder-gray-400 border border-gray-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200',
               help: 'text-xs text-gray-500',
               message: 'text-red-500 text-sm'
             }" v-model="livePriceFormData.convertSymbol" />

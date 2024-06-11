@@ -13,6 +13,7 @@ defineProps({
 })
 
 const coinsEndpoint = ref('https://localhost:7286/api/Coin/GetAll');
+const refreshEndpoint = ref('https://localhost:7286/api/Coin/Refresh');
 const coinsList = ref();
 
 onMounted(() => {
@@ -24,6 +25,10 @@ async function getCoins() {
     const response = await axios.get(`${coinsEndpoint.value}`)
     coinsList.value = response.data
     console.log("COINS LIST:", coinsList.value)
+
+    const responseRefresh = await axios.get(`${refreshEndpoint.value}`)
+    console.log(responseRefresh.data)
+
   } catch (error) {
     console.log(error)
   }

@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col justify-center items-center py-10">
-        <div class="border border-black rounded-md py-8 px-16">
+        <div class="border shadow-lg rounded-md py-8 px-16">
             <FormKit type="form" 
                 :classes="{
                     message: 'text-red-500 text-sm',
@@ -124,6 +124,8 @@
 <script setup>
 import { ref, defineEmits } from 'vue'
 import axios from 'axios';
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 defineProps({
 })
@@ -149,12 +151,15 @@ const errorMessage = ref(null)
 const apiBaseUrl = 'https://localhost:7286/api/Coin'
 
 async function fetchCandleInfo() {
+    const loadingToastId = toast.loading("Loading candle data...");
   try {
     const response = await axios.get(`${apiBaseUrl}/Candles/${formData.value.pair}/${formData.value.interval}/${formData.value.day}/${formData.value.month}/${formData.value.year}/${formData.value.second_day}/${formData.value.second_month}/${formData.value.second_year}`)
     candlesData.value = response.data;  
     emit('dataGenerated', candlesData)
+    toast.update(loadingToastId, { type: toast.TYPE.SUCCESS, render: "Candle values loaded successfully", autoClose: 3000, isLoading: false });
     console.log('candle values:', response.data);
   } catch (error) {
+    toast.update(loadingToastId, { type: toast.TYPE.ERROR, render: "Error in loading candle values", autoClose: 3000, isLoading: false });
     if (error.response) {
       // The request was made and the server responded with a status code
       console.error('Request failed with status code:', error.response.status);

@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col justify-center items-center py-10">
-        <div class="border border-black rounded-md py-8 px-16">
+        <div class="border shadow-lg rounded-md py-8 px-16">
             <FormKit type="form" 
                 :classes="{
                     message: 'text-red-500 text-sm',
@@ -86,6 +86,8 @@
 <script setup>
 import { ref, defineEmits } from 'vue'
 import axios from 'axios';
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 defineProps({
 })
@@ -108,6 +110,7 @@ const formData = ref({
 })
 
 async function fetchPreviousPrices() {
+    const loadingToastId = toast.loading("Loading previous prices...");
   try {
     const response = await axios.get(`${apiBaseUrl}/PreviousPrices/${formData.value.pair}/${formData.value.day}/${formData.value.month}/${formData.value.year}/${formData.value.offset}`, {
         pair: formData.value.pair,
@@ -118,8 +121,10 @@ async function fetchPreviousPrices() {
     })
     prices.value = response.data;  // Set the fetched data to rsiData
     emit('dataGenerated', prices)
+    toast.update(loadingToastId, { type: toast.TYPE.SUCCESS, render: "Previous prices loaded successfully", autoClose: 3000, isLoading: false });
     console.log('Previous prices:', response.data);
   } catch (error) {
+    toast.update(loadingToastId, { type: toast.TYPE.ERROR, render: "Error when loading previous prices..", autoClose: 3000, isLoading: false });
     if (error.response) {
       // The request was made and the server responded with a status code
       console.error('Request failed with status code:', error.response.status);

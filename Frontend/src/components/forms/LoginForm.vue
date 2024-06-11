@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col justify-center items-center py-10">
-        <div class="border border-black rounded-md py-8 px-16">
+        <div class="border shadow-lg rounded-md py-8 px-16">
             <FormKit type="form" 
                 :classes="{
                     message: 'text-red-500 text-sm',

@@ -5,6 +5,7 @@ import Candles from '../components/coin/Candles.vue';
 import LivePrice from '../components/coin/LivePrice.vue';
 import PreviousPrices from '../components/coin/PreviousPrices.vue';
 import Coin from '../components/coin/Coin.vue';
+import Prediction from '../components/coin/Prediction.vue';
 import Profile from '../components/user/Profile.vue';
 import About from '../components/About.vue';
 import Register from '../components/user/Register.vue';
@@ -63,11 +64,16 @@ const routes = [
     component: Candles,
   },
   {
+    path: '/predict',
+    name: 'Predict',
+    component: Prediction,
+  },
+  {
     path: '/coin/:symbol',
     name: 'Coin',
     component: Coin,
     props: true
-  }
+  },
   // Add more routes here as needed
 ];
 

@@ -9,10 +9,10 @@
                     inputClass: 'border border-black py-1 px-4 rounded-md hover:bg-black hover:text-white',
                     wrapperClass: 'border-none',
                 }"
-                @submit="registerUser"        
+                @submit="fetchCandleInfo"        
             >
-                <FormKit type="text" name="name" id="name" validation="required|not:Admin" label="Name"
-                    placeholder="Tirila Patric" 
+                <FormKit type="text" name="pair" id="pair" validation="required|not:Admin" label="Pair"
+                    placeholder="BTCUSDT" 
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',
@@ -21,38 +21,20 @@
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
                     }"    
-                    v-model="formData.userName"
+                    v-model="formData.pair"
                 />
 
-                <FormKit type="text" name="email" id="email" validation="required|not:Admin|email" label="Email"
-                    placeholder="patric@gmail.com"     
+                <FormKit type="number" name="amount" id="amount" validation="required|not:Admin" label="Amount"
+                    placeholder="20"     
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',
-                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        inner: 'w-96 border border-gray-400 rounded-sm mb-1 overflow-hidden focus-within:border-blue-500',
                         input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
                     }"
-                    v-model="formData.email"
-                />
-
-                <FormKit
-                    type="password"
-                    name="password"
-                    value=""
-                    label="Password"
-                    help="Enter a new password"
-                    validation="required"
-                    :classes="{
-                        outer: 'mb-5',
-                        label: 'block mb-1 font-bold text-sm',
-                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
-                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
-                        help: 'text-xs text-gray-500',
-                        message: 'text-red-500 text-sm'
-                    }"
-                    v-model="formData.password"
+                    v-model="formData.amount"
                 />
             </FormKit>
             <p v-if="successMessage !== null" class="text-green-500 mt-4">{{ successMessage }}</p>
@@ -62,35 +44,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import axios from 'axios';
+import { ref, defineEmits } from 'vue'
+import axios from 'axios'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 defineProps({
 })
 
+const emit = defineEmits(['dataGenerated'])
+
 const formData = ref({
-    userName: '',
-    email: '',
-    password: '',
+    pair: '',
+    amount: null,
 })
+
+const predictionData = ref([])
 
 const successMessage = ref(null)
 const errorMessage = ref(null)
 
-const apiBaseUrl = 'https://localhost:7286/signup';
+const apiBaseUrl = 'https://localhost:7286/api/ChatGPT/getPrediction'
 
-async function registerUser() {
-  try {
-    const response = await axios.post(apiBaseUrl, {
-        userName: formData.value.userName,
-        email: formData.value.email,
-        password: formData.value.password,
-    });
-    // rsiData.value = response.data;  // Set the fetched data to rsiData
-    // console.log('RSI values:', response.data);
-    console.log(response)
-    successMessage.value = response.data.message
+async function fetchCandleInfo() {
+    const loadingToastId = toast.loading("Loading predictions...")
+try {
+    const response = await axios.get(`${apiBaseUrl}/${formData.value.pair}/${formData.value.amount}`)
+    predictionData.value = response.data;  
+    emit('dataGenerated', predictionData)
+    toast.update(loadingToastId, { type: toast.TYPE.SUCCESS, render: "Prediction loaded successfully!", autoClose: 3000, isLoading: false });
+    console.log('prediction values:', response.data);
   } catch (error) {
+    toast.update(loadingToastId, { type: toast.TYPE.ERROR, render: "Error when loading prediction", autoClose: 3000, isLoading: false });
     if (error.response) {
       // The request was made and the server responded with a status code
       console.error('Request failed with status code:', error.response.status);

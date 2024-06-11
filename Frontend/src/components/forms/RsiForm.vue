@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col justify-center items-center py-10">
-        <div class="border border-black rounded-md py-8 px-16">
+        <div class="border shadow-lg rounded-md py-8 px-16">
             <FormKit type="form" 
                 :classes="{
                     message: 'text-red-500 text-sm',
@@ -16,7 +16,7 @@
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',
-                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        inner: 'w-96 border border-gray-400 rounded-sm mb-1 overflow-hidden focus-within:border-blue-500',
                         input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
@@ -29,7 +29,7 @@
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',
-                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        inner: 'w-96 border border-gray-400 rounded-sm mb-1 overflow-hidden focus-within:border-blue-500',
                         input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
@@ -42,7 +42,7 @@
                     :classes="{
                         outer: 'mb-5',
                         label: 'block mb-1 font-bold text-sm',
-                        inner: 'w-96 border border-gray-400 rounded-md mb-1 overflow-hidden focus-within:border-blue-500',
+                        inner: 'w-96 border border-gray-400 rounded-sm mb-1 overflow-hidden focus-within:border-blue-500',
                         input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
@@ -59,6 +59,8 @@
 <script setup>
 import { ref, defineEmits } from 'vue'
 import axios from 'axios';
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 defineProps({
 })
@@ -80,25 +82,27 @@ const apiBaseUrl = 'https://localhost:7286/api/Coin'
 
 // Function to call the CalculateRSIs endpoint
 async function fetchRSIs() {
-  try {
-    const response = await axios.get(`${apiBaseUrl}/CalculateRSIs/${formData.value.pair}/${formData.value.offset}/${formData.value.amount}`)
-    rsiData.value = response.data;  // Set the fetched data to rsiData
-    emit('dataGenerated', rsiData)
-    console.log('RSI values:', response.data);
-  } catch (error) {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      console.error('Request failed with status code:', error.response.status);
-      console.error('Response data:', error.response.data);
-      console.error('Response headers:', error.response.headers);
-    } else if (error.request) {
-      // The request was made but no response was received
-      console.error('No response received:', error.request);
-    } else {
-      // Something happened in setting up the request that triggered an error
-      console.error('Error:', error.message);
+
+    const loadingToastId = toast.loading("Loading rsi values...");
+
+    try {
+        const response = await axios.get(`${apiBaseUrl}/CalculateRSIs/${formData.value.pair}/${formData.value.offset}/${formData.value.amount}`)
+        rsiData.value = response.data; 
+        toast.update(loadingToastId, { type: toast.TYPE.SUCCESS, render: "RSI values loaded successfully", autoClose: 3000, isLoading: false });
+        emit('dataGenerated', rsiData)
+        console.log('RSI values:', response.data);
+    } catch (error) {
+        toast.update(loadingToastId, { type: toast.TYPE.ERROR, render: "Error in getting RSI values", autoClose: 3000, isLoading: false });
+        if (error.response) {
+        console.error('Request failed with status code:', error.response.status);
+        console.error('Response data:', error.response.data);
+        console.error('Response headers:', error.response.headers);
+        } else if (error.request) {
+        console.error('No response received:', error.request);
+        } else {
+        console.error('Error:', error.message);
+        }
     }
-  }
 }
 
 </script>

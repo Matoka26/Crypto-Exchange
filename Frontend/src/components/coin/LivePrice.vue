@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="flex justify-center items-center">
+      <div class="border shadow-lg py-8 px-16 mt-10 rounded-md">
         <FormKit type="form" 
                 :classes="{
                     message: 'text-red-500 text-sm',
@@ -23,6 +24,7 @@
                     v-model="formData.pair"
                 />
         </FormKit>
+      </div>
     </div>
 
     <div>
@@ -33,6 +35,8 @@
   <script setup>
   import { ref } from 'vue'
   import axios from 'axios'
+  import { toast } from 'vue3-toastify'
+  import 'vue3-toastify/dist/index.css'
 
   const formData = ref({
     pair: '',
@@ -42,10 +46,13 @@
   const price = ref(null)
 
   async function getLivePrice() {
+    const loadingToastId = toast.loading("Loading live price...")
   try {
     const response = await axios.get(`${apiBaseUrl}/LivePrice/${formData.value.pair}`)
     price.value = response.data;
+    toast.update(loadingToastId, { type: toast.TYPE.SUCCESS, render: "Live price loaded successfully", autoClose: 3000, isLoading: false });
   } catch (error) {
+    toast.update(loadingToastId, { type: toast.TYPE.ERROR, render: "Error in loading live price..", autoClose: 3000, isLoading: false });
     if (error.response) {
       // The request was made and the server responded with a status code
       console.error('Request failed with status code:', error.response.status);

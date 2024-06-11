@@ -15,12 +15,12 @@
     <!-- Primary Navigation -->
     <div class="hidden xl:flex space-x-6">
       <RouterLink to="/" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Home</RouterLink>
-      <RouterLink to="/about" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">About</RouterLink>
+      <RouterLink to="/predict" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Predict</RouterLink>
       <RouterLink to="/calculate-rsi" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Calculate RSIs</RouterLink>
       <RouterLink to="/candles" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Candles</RouterLink>
       <RouterLink to="/live-price" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Live Price</RouterLink>
       <RouterLink to="/previous-prices" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Previous Prices</RouterLink>
-      <RouterLink to="/previous-price" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Previous Price</RouterLink>
+      <RouterLink to="/about" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">About</RouterLink>
     </div>
 
     <!-- Secondary Navigation -->

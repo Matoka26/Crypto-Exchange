@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col justify-center items-center py-10">
-        <div class="border border-black rounded-md py-8 px-16">
+        <div class="border shadow-lg rounded-md py-8 px-16">
             <FormKit type="form" 
                 :classes="{
                     message: 'text-red-500 text-sm',
@@ -74,8 +74,11 @@ async function login() {
     // rsiData.value = response.data;  // Set the fetched data to rsiData
     // console.log('RSI values:', response.data);
     console.log(response)
-    successMessage.value = response.data.message
+    localStorage.setItem('user', true);
+    window.location.href='/';
+    successMessage.value = 'Log In was succesfull!'
   } catch (error) {
+    errorMessage.value = 'An error happened. Please try again!'
     if (error.response) {
       // The request was made and the server responded with a status code
       console.error('Request failed with status code:', error.response.status)

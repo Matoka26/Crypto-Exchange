@@ -1,19 +1,24 @@
 ﻿using Newtonsoft.Json.Linq;
 using test_binance_api.Models;
-
+using test_binance_api.Repository.GenericRepository;
+using test_binance_api.Data;
+using test_binance_api.Models.Errors;
 
 namespace test_binance_api.Repository.CoinRepository
 {
-    public class CoinRepository : ICoinRepository
+    public class CoinRepository : GenericRepository<Coin>, ICoinRepository
     {
         public readonly IHttpClientFactory _clientFactory;
 
-        public CoinRepository(IHttpClientFactory clientFactory)
+        public CoinRepository(BinanceContext binanceContext, IHttpClientFactory clientFactory) : base(binanceContext)
         {
             _clientFactory = clientFactory;
         }
 
 
+
+        //used Binance REST Api to get the live price
+        //must receive a valid pair <coin symbol + fiat currency>
         public async Task<decimal> GetLivePrice(string pair)
         {
             pair = pair.ToUpperInvariant();
@@ -26,6 +31,65 @@ namespace test_binance_api.Repository.CoinRepository
         }
 
 
+        //used CryptoCompare REST Api to get the market capitalization for a crypto currency
+        //must receive a valid pair <coin symbol + fiat currency>
+        //used ChatGPT for parsing
+        public async Task<decimal> GetMarketCapAsync(string symbol)
+        {
+
+            symbol = symbol.ToUpperInvariant();
+            string lastFourCharacters = symbol.Substring(symbol.Length - 4);
+
+            if (lastFourCharacters.Equals("Usdt", StringComparison.OrdinalIgnoreCase))
+            {
+                // If the last 4 characters are "Usdt", delete them
+                symbol =  symbol.Substring(0, symbol.Length - 4);
+            }
+            else if (symbol.Length >= 3)
+            {
+                // Get the last 3 characters of the input string
+                string lastThreeCharacters = symbol.Substring(symbol.Length - 3);
+
+                // Check if the last 3 characters are "eur", "usdt", or "ron"
+                if (lastThreeCharacters.Equals("eur", StringComparison.OrdinalIgnoreCase) ||
+                    lastThreeCharacters.Equals("usdt", StringComparison.OrdinalIgnoreCase) ||
+                    lastThreeCharacters.Equals("ron", StringComparison.OrdinalIgnoreCase))
+                {
+                    // If yes, delete the last 3 characters
+                    symbol =  symbol.Substring(0, symbol.Length - 3);
+                }
+            }
+
+            string cryptoCompareApiUrl = $"https://min-api.cryptocompare.com/data/pricemultifull?fsyms={symbol}&tsyms=USD";
+
+            var client = _clientFactory.CreateClient();
+
+            // Get the market data from CryptoCompare
+            var cryptoCompareResponse = await client.GetAsync(cryptoCompareApiUrl);
+            if (!cryptoCompareResponse.IsSuccessStatusCode)
+            {
+                throw new Exception($"Error: {cryptoCompareResponse.ReasonPhrase}");
+            }
+            var cryptoCompareContent = await cryptoCompareResponse.Content.ReadAsStringAsync();
+            var cryptoCompareJson = JObject.Parse(cryptoCompareContent);
+
+            // Extract the market cap from the response
+            try 
+            {
+                decimal marketCap = (decimal)cryptoCompareJson["RAW"][symbol]["USD"]["MKTCAP"];
+                return marketCap;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Pair not found");
+            }
+            
+            
+        }
+
+        //used Binance REST Api to get price from the past
+        //used ChatGPT for parsing
+        //must receive a valid pair <coin symbol + fiat currency>
         public async Task<decimal> GetHistoricalPrice(string pair, DateTime date)
         {
 
@@ -73,6 +137,9 @@ namespace test_binance_api.Repository.CoinRepository
 
         }
 
+        //function that gets all the prices from a range(given date -> given date - offset)
+        //using GetHistoricalPrice
+        //must receive a valid pair <coin symbol + fiat currency> a valid date and a positive offset
         public async Task<List<decimal>> GetPreviousPrices(string pair, DateTime date, int offset)
         {
             List<decimal> prices = new List<decimal>();
@@ -96,7 +163,7 @@ namespace test_binance_api.Repository.CoinRepository
         }
 
 
-
+        //function that calculate the rsi index value for a range of prices
         public async Task<decimal> CalculateRSI(List<decimal> prices)
         {
 
@@ -128,7 +195,9 @@ namespace test_binance_api.Repository.CoinRepository
             return rsi;
         }
 
-
+        //function that gets previous prices from today to a calculated date and retuns a list of rsi values
+        //must receive a valid pair <coin symbol + fiat currency>
+        //must receive a positive offset and amount
         public async Task<List<decimal>> CalculateLastRSIs(string pair, int offset, int amount)
         {
             List<decimal> values = new List<decimal>();

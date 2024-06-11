@@ -34,14 +34,17 @@ namespace test_binance_api.Service.UserService
             _emailService = emailService;
         }
 
-
+        //create
         public async Task<UserDTO> CreateAsync(UserCreateDTO user)
         {
             var newUser = _mapper.Map<User>(user);
+            Console.WriteLine(newUser.PasswordHash);
             await _userRepository.CreateAsync(newUser);
             return _mapper.Map<UserDTO>(newUser);
         }
 
+
+        //find
         public async Task<UserDTO> GetUserById(Guid id)
         {
             var user = await _userRepository.GetUserById(id);
@@ -49,6 +52,8 @@ namespace test_binance_api.Service.UserService
             return _mapper.Map<UserDTO>(user);
         }
 
+
+        //get all
         public async Task<List<UserDTO>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetUsersAsync();
@@ -61,8 +66,14 @@ namespace test_binance_api.Service.UserService
             await _userRepository.Delete(id);
         }
 
+
+        //update
         public async Task<UserDTO> Update(UserUpdateDTO user)
         {
+            // Validate the user DTO
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            if (user.Id == Guid.Empty) throw new ArgumentException("User ID cannot be empty", nameof(user.Id));
+
             var existingUser = await _userRepository.GetUserById(user.Id);
 
             if (existingUser == null)
@@ -70,15 +81,23 @@ namespace test_binance_api.Service.UserService
                 throw new Exception("User not found");
             }
 
-            var hasher = new PasswordHasher<User>();
-            if (user.UserName != null) existingUser.UserName = user.UserName;
-            if (user.FirstName != null) existingUser.FirstName = user.FirstName;
-            if (user.LastName != null) existingUser.LastName = user.LastName;
-            if (user.Email != null) existingUser.Email = user.Email;
-            if (user.Password != null) existingUser.PasswordHash = hasher.HashPassword(null, user.Password);
+            UpdateUserFields(existingUser, user);
 
             await _userRepository.Update(existingUser);
             return _mapper.Map<UserDTO>(existingUser);
+        }
+        
+        private void UpdateUserFields(User existingUser, UserUpdateDTO user)
+        {
+            if (!string.IsNullOrWhiteSpace(user.UserName)) existingUser.UserName = user.UserName;
+            if (!string.IsNullOrWhiteSpace(user.FirstName)) existingUser.FirstName = user.FirstName;
+            if (!string.IsNullOrWhiteSpace(user.LastName)) existingUser.LastName = user.LastName;
+            if (!string.IsNullOrWhiteSpace(user.Email)) existingUser.Email = user.Email;
+            if (!string.IsNullOrWhiteSpace(user.Password))
+            {
+                var hasher = new PasswordHasher<User>();
+                existingUser.PasswordHash = hasher.HashPassword(existingUser, user.Password);
+            }
         }
 
         public async Task<Guid> Login(LoginDTO loginDto)
@@ -94,11 +113,18 @@ namespace test_binance_api.Service.UserService
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(email, isPersistent: true);
+
+
+                User user = await _userRepository.GetUserById(email.Id);
+                user.Consent = true;
+                await _userRepository.Update(user);
+
                 return email.Id;
             }
 
             throw new Exception("Wrong password");
         }
+
 
         public async Task Logout()
         {

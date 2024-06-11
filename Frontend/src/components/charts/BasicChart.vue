@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-4xl mx-auto mt-10">
+    <div :class="'w-[50rem] mx-auto mt-10' + classes">
       <div v-if="props.rsiValues.length > 0" id="chart" class="bg-white shadow-md rounded-lg p-4">
         <apexchart 
           type="line" 
@@ -18,6 +18,9 @@
     rsiValues: {
       type: Array,
       required: true
+    },
+    classes: {
+      type: String,
     }
   });
   

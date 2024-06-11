@@ -23,6 +23,8 @@ namespace test_binance_api.Service.UserWalletHistoryService
 
         }
 
+
+        //function that creates a user with his own history and wallet
         public async Task<UserDTO> CreateAsync(UserCreateDTO user)
         {
             var newUser = _mapper.Map<User>(user);

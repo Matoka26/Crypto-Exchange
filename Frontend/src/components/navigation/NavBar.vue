@@ -26,9 +26,9 @@
     <!-- Secondary Navigation -->
     <div class="hidden xl:flex space-x-4 items-center">
       <RouterLink to="/profile" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Profile</RouterLink>
-      <RouterLink to="/login" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Login</RouterLink>
-      <RouterLink to="/register" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Register</RouterLink>
-      <RouterLink to="/logout" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Logout</RouterLink>
+      <RouterLink to="/login" v-if="!isAuthenticated" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Login</RouterLink>
+      <RouterLink to="/register" v-if="!isAuthenticated" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg">Register</RouterLink>
+      <RouterLink to="/logout" v-if="isAuthenticated" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg" @click="logout">Logout</RouterLink>
     </div>
 
     <!-- Mobile Menu Button -->
@@ -50,20 +50,21 @@
       <RouterLink to="/live-price" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg" @click.native="closeMenu">Live Price</RouterLink>
       <RouterLink to="/previous-prices" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg" @click.native="closeMenu">Previous Prices</RouterLink>
       <RouterLink to="/previous-price" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg" @click.native="closeMenu">Previous Price</RouterLink>
-      <RouterLink to="/login" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg border-t border-gray-200 mt-8" @click.native="closeMenu">Login</RouterLink>
-      <RouterLink to="/register" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg" @click.native="closeMenu">Register</RouterLink>
-      <RouterLink to="/logout" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg" @click.native="closeMenu">Logout</RouterLink>
+      <RouterLink to="/login" v-if="!isAuthenticated" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg border-t border-gray-200 mt-8" @click.native="closeMenu">Login</RouterLink>
+      <RouterLink to="/register" v-if="!isAuthenticated" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg" @click.native="closeMenu">Register</RouterLink>
+      <RouterLink to="/logout" v-if="isAuthenticated" class="py-2 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-lg" @click.native="closeMenu" @click="logout">Logout</RouterLink>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, watch, onMounted, onUnmounted, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const isOpen = ref(false)
 const isMobile = ref(false)
 const route = useRoute()
+const router = useRouter()
 
 const checkScreenSize = () => {
   isMobile.value = window.innerWidth < 1280 // Adjusted to 1280px for the xl breakpoint
@@ -77,13 +78,31 @@ const toggleMenu = () => {
   isOpen.value = !isOpen.value
 }
 
+const authenticated = ref(false)
+
+const checkAuth = () => {
+  const userData = localStorage.getItem('user');
+  authenticated.value = userData ? true : false;
+}
+
 onMounted(() => {
   checkScreenSize()
+  checkAuth()
   window.addEventListener('resize', checkScreenSize)
+  window.addEventListener('storage', checkAuth) // Listen for changes to localStorage
 })
+
+const isAuthenticated = computed(() => authenticated.value);
+
+const logout = () => {
+  localStorage.removeItem('user');
+  checkAuth();
+  router.push('/login');
+}
 
 onUnmounted(() => {
   window.removeEventListener('resize', checkScreenSize)
+  window.removeEventListener('storage', checkAuth)
 })
 
 watch(route, () => {
@@ -96,4 +115,3 @@ watch(route, () => {
   outline: none;
 }
 </style>
-

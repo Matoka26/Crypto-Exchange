@@ -5,10 +5,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import RegisterForm from '../forms/RegisterForm.vue'
 
 defineProps({
+})
+
+onMounted(() => {
+  localStorage.removeItem('user')
 })
 
 </script>

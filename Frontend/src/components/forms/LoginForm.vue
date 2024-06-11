@@ -74,8 +74,11 @@ async function login() {
     // rsiData.value = response.data;  // Set the fetched data to rsiData
     // console.log('RSI values:', response.data);
     console.log(response)
-    successMessage.value = response.data.message
+    localStorage.setItem('user', true);
+    window.location.href='/';
+    successMessage.value = 'Log In was succesfull!'
   } catch (error) {
+    errorMessage.value = 'An error happened. Please try again!'
     if (error.response) {
       // The request was made and the server responded with a status code
       console.error('Request failed with status code:', error.response.status)

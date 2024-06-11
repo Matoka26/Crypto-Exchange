@@ -32,7 +32,7 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.Password.RequiredLength = 8;
     opt.User.RequireUniqueEmail = true;
     opt.SignIn.RequireConfirmedAccount = false;
-    opt.SignIn.RequireConfirmedEmail = true;        /// !!!!!!!! 
+    opt.SignIn.RequireConfirmedEmail = false;        /// !!!!!!!! 
     opt.SignIn.RequireConfirmedPhoneNumber = false;
 });
 

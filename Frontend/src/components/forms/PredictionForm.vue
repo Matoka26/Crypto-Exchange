@@ -24,7 +24,7 @@
                     v-model="formData.pair"
                 />
 
-                <FormKit type="number" name="amount" id="amount" validation="required|not:Admin" label="Amount"
+                <FormKit type="number" name="offset" id="offset" validation="required|not:Admin" label="Offset"
                     placeholder="20"     
                     :classes="{
                         outer: 'mb-5',
@@ -34,7 +34,33 @@
                         help: 'text-xs text-gray-500',
                         message: 'text-red-500 text-sm'
                     }"
-                    v-model="formData.amount"
+                    v-model="formData.offset"
+                />
+
+                <FormKit type="number" name="rsivalues" id="rsivalues" validation="required|not:Admin" label="RSI Values"
+                    placeholder="20"     
+                    :classes="{
+                        outer: 'mb-5',
+                        label: 'block mb-1 font-bold text-sm',
+                        inner: 'w-96 border border-gray-400 rounded-sm mb-1 overflow-hidden focus-within:border-blue-500',
+                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+                        help: 'text-xs text-gray-500',
+                        message: 'text-red-500 text-sm'
+                    }"
+                    v-model="formData.rsivalues"
+                />
+
+                <FormKit type="number" name="predictions" id="predictions" validation="required|not:Admin" label="Predictions"
+                    placeholder="20"     
+                    :classes="{
+                        outer: 'mb-5',
+                        label: 'block mb-1 font-bold text-sm',
+                        inner: 'w-96 border border-gray-400 rounded-sm mb-1 overflow-hidden focus-within:border-blue-500',
+                        input: 'w-full h-8 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+                        help: 'text-xs text-gray-500',
+                        message: 'text-red-500 text-sm'
+                    }"
+                    v-model="formData.predictions"
                 />
             </FormKit>
             <p v-if="successMessage !== null" class="text-green-500 mt-4">{{ successMessage }}</p>
@@ -56,7 +82,9 @@ const emit = defineEmits(['dataGenerated'])
 
 const formData = ref({
     pair: '',
-    amount: null,
+    offset: null,
+    rsivalues: null,
+    predictions: null,
 })
 
 const predictionData = ref([])
@@ -64,12 +92,12 @@ const predictionData = ref([])
 const successMessage = ref(null)
 const errorMessage = ref(null)
 
-const apiBaseUrl = 'https://localhost:7286/api/ChatGPT/getPrediction'
+const apiBaseUrl = 'https://localhost:7286/api/ChatGPT/GetPrediction'
 
 async function fetchCandleInfo() {
     const loadingToastId = toast.loading("Loading predictions...")
 try {
-    const response = await axios.get(`${apiBaseUrl}/${formData.value.pair}/${formData.value.amount}`)
+    const response = await axios.get(`${apiBaseUrl}/${formData.value.pair}/${formData.value.offset}/${formData.value.rsivalues}/${formData.value.predictions}`)
     predictionData.value = response.data;  
     emit('dataGenerated', predictionData)
     toast.update(loadingToastId, { type: toast.TYPE.SUCCESS, render: "Prediction loaded successfully!", autoClose: 3000, isLoading: false });

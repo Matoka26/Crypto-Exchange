@@ -1,6 +1,8 @@
 # Crypto-Exchange App
+## [Live Demo](https://www.youtube.com/watch?v=V098p5Q4zmc&ab_channel=AndreiAlexandru)
 
 The Crypto-Exchange APP is a robust ASP.NET application designed to manage and forecast the prices of various cryptocurrencies. It offers real-time price tracking, historical data analysis, and trend visualization, providing users with valuable market insights. By using advanced statistics and AI, the app predicts future price movements, helping traders and investors make smart decisions. With its intuitive interface and comprehensive data management capabilities, this tool is ideal for anyone looking to effectively navigate the cryptocurrency market.
+
 
 ## 1. User stories:  
 ### Backend
@@ -41,8 +43,8 @@ of my interest, such as graphs of price fluctuation
 
 ## 2. Backlog Creation:
 > [!NOTE]
-> The snip is during the delevopment phase!  
-> It's not up to date
+> The snip is during the delevopment phase!, 
+> It's not up to date!
 
 ![Trello_backlog](readme_images/Trello_backlog.png)
 1. <b>Enter app:</b> 
@@ -79,7 +81,7 @@ of my interest, such as graphs of price fluctuation
 
 9. <b>Display charts</b>
     - [x] Candle Sticks
-    - [x] Others
+    - [x] Disk
 
 10. <b>Profile Page</b>
     - [x] Display user info on a personal page 
@@ -97,7 +99,7 @@ of my interest, such as graphs of price fluctuation
 ### [View all branches](https://github.com/Matoka26/Crypto-Exchange/branches)
 ### [View contributors](https://github.com/Matoka26/Crypto-Exchange/graphs/contributors)
 
-[TODO adauga chart]
+![Contributions](readme_images/Contributions.png)
 
 ## 6. Unit Test Automation
 
@@ -120,7 +122,8 @@ Results:
 ![Unit_Tests_Results](readme_images/Unit_Tests_Results.png)
 
 ## 7. Bug Reports
-![Issues](readme_images/Issues.png)
+![Issue](readme_images/Issue.png)
+![Closed](readme_images/Closed.png)
 
 ## 8. Code Comments
 > [!NOTE]
@@ -281,7 +284,41 @@ public interface IGenericRepository<TEntity> where TEntity : BaseEntity
 ## 10. Integration of AI tools
 OpenAI API has been utilized for predicting the future prices of the market
 
-[TODO adauga snip de cod]
+```
+ [HttpPost]
+    public async Task<string> GetAIBasedResult(string searchText, int maxTokens)
+        {
+            try
+            {
+                // Connection key for OpenAI API
+                var apiKey = Configuration["ApiKeys:OpenAIKey"];
+
+                string answer = string.Empty;
+
+                var openai = new OpenAIAPI(apiKey);
+                CompletionRequest completion = new CompletionRequest
+                {
+                    Prompt = searchText,                                      // text to search
+                    Model = OpenAI_API.Models.Model.ChatGPTTurboInstruct,     // model to ask
+                    MaxTokens = maxTokens                                     // max tokens of a batch (depending on model)
+                };
+
+                // Search for result
+                var result = await openai.Completions.CreateCompletionsAsync(completion);
+                if (result.Completions.Count > 0)
+                {
+                    // Get the first completion's text
+                    answer = result.Completions[0].Text.Trim();
+                }
+
+                return answer;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+```
 
 ## 11. AI tools usage
 AI tools have been utilized to enhance various aspects of the software development process. AI has been employed to improve code quality, automate repetitive tasks, and facilitate efficient debugging and testing.
@@ -342,4 +379,64 @@ public void SeedInitialUsers()
         _binanceContext.SaveChanges();
     }
 }
+```
+
+
+## 12. Refactoring, code standards
+
+#### Initial:
+```
+    public async Task<UserDTO> Update(UserUpdateDTO user)
+        {
+            var existingUser = await _userRepository.GetUserById(user.Id);
+
+            if (existingUser == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            var hasher = new PasswordHasher<User>();
+            if (user.UserName != null) existingUser.UserName = user.UserName;
+            if (user.FirstName != null) existingUser.FirstName = user.FirstName;
+            if (user.LastName != null) existingUser.LastName = user.LastName;
+            if (user.Email != null) existingUser.Email = user.Email;
+            if (user.Password != null) existingUser.PasswordHash = hasher.HashPassword(null, user.Password);
+
+            await _userRepository.Update(existingUser);
+            return _mapper.Map<UserDTO>(existingUser);
+        }
+```
+
+#### After refactor:
+```
+    public async Task<UserDTO> Update(UserUpdateDTO user)
+        {
+            // Validate the user DTO
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            if (user.Id == Guid.Empty) throw new ArgumentException("User ID cannot be empty", nameof(user.Id));
+
+            var existingUser = await _userRepository.GetUserById(user.Id);
+
+            if (existingUser == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            UpdateUserFields(existingUser, user);
+
+            await _userRepository.Update(existingUser);
+            return _mapper.Map<UserDTO>(existingUser);
+        }
+    private void UpdateUserFields(User existingUser, UserUpdateDTO user)
+        {
+            if (!string.IsNullOrWhiteSpace(user.UserName)) existingUser.UserName = user.UserName;
+            if (!string.IsNullOrWhiteSpace(user.FirstName)) existingUser.FirstName = user.FirstName;
+            if (!string.IsNullOrWhiteSpace(user.LastName)) existingUser.LastName = user.LastName;
+            if (!string.IsNullOrWhiteSpace(user.Email)) existingUser.Email = user.Email;
+            if (!string.IsNullOrWhiteSpace(user.Password))
+            {
+                var hasher = new PasswordHasher<User>();
+                existingUser.PasswordHash = hasher.HashPassword(existingUser, user.Password);
+            }
+        }
 ```

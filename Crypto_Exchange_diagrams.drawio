@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-11T11:37:52.393Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="thN-nUtoTaUCpbH5nqi-" version="24.5.2" type="device">
+<mxfile host="app.diagrams.net" modified="2024-06-12T13:12:45.696Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="_H1w9D5NlPMScDt7ftzo" version="24.5.3" type="device" pages="2">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="UML diagram">
     <mxGraphModel dx="1313" dy="769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -549,6 +549,14 @@
             </Array>
           </mxGeometry>
         </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="q8L55pb3UXQsEjKm3I6Q" name="Workflow diagram">
+    <mxGraphModel dx="2100" dy="1230" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>

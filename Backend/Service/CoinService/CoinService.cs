@@ -59,7 +59,7 @@ namespace test_binance_api.Service.CoinService
         //create(+ getting live info)
         public async Task CreateCoin(CoinCreateDTO coin)
         {
-            string pair = coin.Symbol;
+            string? pair = coin.Symbol;
             var vcoin = _mapper.Map<Coin>(coin);
             vcoin.Price = await _coinRepository.GetLivePrice(pair);
             vcoin.MarketCap = await _coinRepository.GetMarketCapAsync(pair);

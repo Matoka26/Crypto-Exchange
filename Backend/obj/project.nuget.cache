@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lyeYLZuTncQxWGtalcDvgNTJfsdVhqbOahbADpF0k3an1ltZeTVCr4EdvZAnA2p23FBBrBcZu0ZofeGBc5ii1w==",
+  "dgSpecHash": "PAHBAsU8lqhuTn5KMZ2DMzxJ+YK8/nBdyMB9ZwrfYoPapsw0ZCpNa3j0AzSWasFPWQEbw7k9yIuoCU2i5uAuQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\Last_git\\Crypto-Exchange\\Backend\\test_binance_api.csproj",
+  "projectFilePath": "C:\\Users\\rzvan\\OneDrive\\Desktop\\Unibuc\\An2\\Sem 2\\MDS\\testIS\\Crypto-Exchange\\Backend\\test_binance_api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rzvan\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\rzvan\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
